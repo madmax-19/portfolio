@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Mind Game — Yadunand embedded systems project case study">
+<title>Mind Game — Yadunand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.project-page{padding-top:125px;padding-bottom:100px}
+.back{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;margin-bottom:45px}
+.back:hover{color:var(--green)}
+.project-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding-bottom:90px;border-bottom:1px solid var(--line)}
+.project-kicker{color:var(--green);font-size:10px;letter-spacing:.2em;font-weight:700}
+.project-hero h1{font:700 clamp(48px,6.5vw,88px)/.96 "Space Grotesk";letter-spacing:-.06em;margin:18px 0}
+.project-hero h1 em{color:var(--green);font-style:normal}
+.project-hero p{max-width:650px;color:var(--muted);font-size:15px;line-height:1.8}
+.actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--card);color:var(--text);padding:10px 14px;border-radius:7px;font-size:11px;font-weight:600;text-decoration:none;transition:.25s}
+.button:hover,.main-btn{background:var(--green);color:#0b1007;border-color:var(--green)}
+.hero-device{height:390px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(circle at 50% 35%,#1b2815,#0b0d0e 65%);display:grid;place-items:center;position:relative;overflow:hidden}
+.hero-device:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 49%,#b0ff4210 50%,transparent 51%);background-size:100% 22px}
+.device{width:270px;padding:18px;border:1px solid #b0ff4238;border-radius:18px;background:#0e120d;box-shadow:0 30px 80px #0008;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
+.device-top{width:100%;display:flex;justify-content:space-between;color:#566056;font:8px monospace;letter-spacing:.15em;margin-bottom:12px}
+.status-led{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green),0 0 18px #b0ff4266}
+.device-screen{width:215px;height:125px;border:5px solid #272d29;border-radius:7px;background:#061006;box-shadow:inset 0 0 25px #000,0 0 25px #b0ff4212;padding:14px;color:var(--green);font:9px monospace;text-align:center}
+.device-screen b{display:block;font-size:25px;margin:8px 0}
+.device-leds{display:flex;justify-content:center;gap:12px;margin:10px 0}
+.device-leds i{width:12px;height:12px;border-radius:50%;background:#263125;border:1px solid #52604d}
+.device-leds i:nth-child(2){background:var(--green);box-shadow:0 0 10px var(--green),0 0 20px #b0ff4266}
+.device-buttons{display:flex;gap:12px;margin-top:18px}
+.device-buttons i{width:22px;height:22px;border-radius:50%;border:2px solid #424a42;background:#151915;box-shadow:inset 0 2px 3px #000,0 3px 5px #000}
+.device-name{margin-top:14px;color:#4e594f;font:8px monospace;letter-spacing:.2em}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:35px 0 0}
+.spec{border:1px solid var(--line);background:var(--card);padding:18px;border-radius:10px}
+.spec small{display:block;color:#656c76;font-size:8px;letter-spacing:.14em}.spec b{display:block;margin-top:8px;font:600 15px "Space Grotesk"}
+.case-section{padding-top:105px}.case-heading{margin-bottom:35px}.case-heading small{color:var(--green);font-size:10px;letter-spacing:.18em}.case-heading h2{font:700 clamp(38px,5vw,62px)/1 "Space Grotesk";letter-spacing:-.05em;margin-top:13px}.case-heading h2 em{color:var(--green);font-style:normal}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:25px}.panel h3{font:600 22px "Space Grotesk";margin-bottom:12px}.panel p,.panel li{color:var(--muted);font-size:13px;line-height:1.8}.panel ul{padding-left:18px}.panel li{margin:7px 0}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.flow div{text-align:center;border:1px solid var(--line);padding:16px 7px;border-radius:8px;background:var(--card2);font-size:9px;color:var(--muted)}.flow b{display:block;color:var(--green);font-size:18px;margin-bottom:5px}
+.pin-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}.pin-table th,.pin-table td{text-align:left;padding:11px;border-bottom:1px solid var(--line)}.pin-table th{color:var(--green);font-size:9px;letter-spacing:.1em}.pin-table td{color:var(--muted)}
+.logic{display:grid;gap:9px;margin-top:18px}.logic div{padding:12px 15px;border:1px solid var(--line);border-radius:7px;background:var(--card2);font:11px monospace;color:#aab0b8}.logic strong{color:var(--green)}
+.oled-demo{display:grid;place-items:center;min-height:230px;background:#080a09;border:1px solid var(--line);border-radius:10px}.oled-screen{width:260px;height:135px;border:8px solid #272d28;border-radius:7px;background:#061006;color:var(--green);padding:14px;font:10px monospace}.oled-screen b{display:block;text-align:center;font-size:25px;margin:12px 0}.led-demo{display:flex;gap:14px;justify-content:center;margin:12px 0}.led-demo i{width:15px;height:15px;border-radius:50%;background:#263125;border:1px solid #52604d}.led-demo i.active{background:var(--green);box-shadow:0 0 10px var(--green)}
+.code-wrap{position:relative}.copy-btn{position:absolute;right:15px;top:15px;background:var(--green);border:0;color:#0a0d08;padding:8px 11px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;z-index:2}.code{max-height:620px;overflow:auto;background:#080a0b;border:1px solid var(--line);border-radius:10px;padding:22px;color:#bbc1c9;font:11px/1.7 Consolas,monospace;white-space:pre}
+.final-box{border:1px solid #b0ff4230;background:linear-gradient(145deg,#151d10,var(--card));border-radius:15px;padding:35px}.final-box h3{font:600 25px "Space Grotesk";margin-bottom:10px}.final-box p{max-width:800px;color:var(--muted);font-size:13px;line-height:1.8}
+@media(max-width:800px){.project-hero,.case-grid{grid-template-columns:1fr}.hero-device{height:320px}.specs{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}.flow div{min-height:auto}.actions{margin-bottom:10px}}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<header><nav class="nav container"><a class="logo" href="index.html"><span>Y</span> YADUNAND</a><div class="links"><a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#work">Work</a><a href="index.html#ideas">Ideas</a><a href="index.html#contact">Contact</a></div><div class="nav-actions"><button id="theme">◐</button></div></nav></header>
+<main class="project-page container">
+<a class="back" href="index.html#work">← BACK TO WORK</a>
+<section class="project-hero"><div><div class="project-kicker">PROJECT 04 / EMBEDDED SYSTEMS</div><h1>MIND<br><em>GAME.</em></h1><p>An Arduino-based memory challenge that combines four LEDs, four push buttons, a speaker and a 128×64 SH1106 OLED display. The game generates a random sequence, shows it through light and sound, and increases the level after every successful round.</p><div class="actions"><a class="button main-btn" href="#code">View code ↓</a><a class="button" href="#hardware">Explore hardware</a></div></div><div class="hero-device"><div class="device"><div class="device-top"><span>MIND GAME // SYSTEM</span><i class="status-led"></i></div><div class="device-screen"><span>MIND GAME</span><b>LEVEL 04</b><div class="device-leds"><i></i><i></i><i></i><i></i></div><span>SCORE: 12</span></div><div class="device-buttons"><i></i><i></i><i></i><i></i></div><div class="device-name">ARDUINO MEMORY CHALLENGE</div></div></div></section>
+<div class="specs"><div class="spec"><small>CONTROLLER</small><b>Arduino UNO</b></div><div class="spec"><small>DISPLAY</small><b>SH1106 128×64</b></div><div class="spec"><small>INPUT</small><b>4 + START</b></div><div class="spec"><small>OUTPUT</small><b>4 LED + BUZZER</b></div></div>
+<section class="case-section"><div class="case-heading"><small>01 / OVERVIEW</small><h2>A memory game built<br>with simple hardware.</h2></div><div class="case-grid"><div class="panel"><h3>The idea</h3><p>The player presses START and watches a sequence of four possible LED and sound signals. The player then reproduces the same sequence using the four buttons. Every successful round adds one more signal to the sequence, making the game progressively harder.</p></div><div class="panel"><h3>Core features</h3><ul><li>Random sequence generation up to 100 levels.</li><li>Four LEDs provide visual feedback.</li><li>Four tones identify the four game inputs.</li><li>SH1106 OLED displays game status and score.</li><li>Wrong input ends the round and shows GAME OVER.</li></ul></div></div></section>
+<section class="case-section"><div class="case-heading"><small>02 / SYSTEM FLOW</small><h2>From random signal<br>to player input.</h2></div><div class="panel"><div class="flow"><div><b>01</b>START<div>Press start</div></div><div><b>02</b>GENERATE<div>Random sequence</div></div><div><b>03</b>SHOW<div>LED + sound</div></div><div><b>04</b>REPEAT<div>Player input</div></div><div><b>05</b>CHECK<div>Next level / game over</div></div></div></div></section>
+<section class="case-section" id="hardware"><div class="case-heading"><small>03 / HARDWARE</small><h2>The electronics<br>behind the game.</h2></div><div class="case-grid"><div class="panel"><h3>Components</h3><ul><li>Arduino UNO — main controller.</li><li>SH1106 128×64 SPI OLED — game interface.</li><li>4 push buttons — player input.</li><li>1 start button — begins a new game.</li><li>4 LEDs — visual sequence output.</li><li>Speaker / buzzer — audio sequence output.</li></ul></div><div class="panel"><h3>Pin configuration</h3><table class="pin-table"><tr><th>MODULE</th><th>PIN</th></tr><tr><td>BUTTON 1</td><td>D2</td></tr><tr><td>BUTTON 2</td><td>D3</td></tr><tr><td>BUTTON 3</td><td>D4</td></tr><tr><td>BUTTON 4</td><td>D5</td></tr><tr><td>START BUTTON</td><td>D6</td></tr><tr><td>OLED CS / DC / RESET</td><td>D10 / D9 / D8</td></tr><tr><td>LED 1–4</td><td>A0 / A1 / A2 / A3</td></tr><tr><td>BUZZER</td><td>D12</td></tr></table></div></div></section>
+<section class="case-section"><div class="case-heading"><small>04 / GAME LOGIC</small><h2>Each round adds<br>one more challenge.</h2></div><div class="case-grid"><div class="panel"><h3>Sequence generation</h3><p>At the beginning of a new game, the program fills the sequence array with random values from 0 to 3. The current level decides how many values are shown during the round.</p><div class="logic"><div><strong>LEVEL 1</strong> → 1 signal</div><div><strong>LEVEL 2</strong> → 2 signals</div><div><strong>LEVEL 3</strong> → 3 signals</div><div><strong>LEVEL 4</strong> → 4 signals</div></div></div><div class="panel"><h3>Player validation</h3><p>Each button maps to one sequence value. The player input is checked immediately. A correct sequence increases the score and level. A wrong button returns false and triggers the game-over screen.</p><div class="logic"><div><strong>CORRECT</strong> → score++ → level++</div><div><strong>WRONG</strong> → GAME OVER</div><div><strong>START</strong> → reset score + level</div></div></div></div></section>
+<section class="case-section"><div class="case-heading"><small>05 / OLED INTERFACE</small><h2>The display keeps<br>the player informed.</h2></div><div class="case-grid"><div class="panel"><h3>Startup screen</h3><div class="oled-demo"><div class="oled-screen">MIND GAME<hr><b>PRESS START</b><center>Memory Challenge</center></div></div></div><div class="panel"><h3>Game feedback</h3><div class="oled-demo"><div class="oled-screen">YOUR TURN<hr><b>LEVEL 04</b><center>Repeat sequence</center><div class="led-demo"><i></i><i class="active"></i><i></i><i></i></div></div></div></div></div></section>
+<section class="case-section" id="code"><div class="case-heading"><small>06 / COMPLETE ARDUINO CODE</small><h2>The actual <em>Mind Game code.</em></h2></div><div class="panel code-wrap"><button class="copy-btn" id="copyCode">Copy code</button><pre class="code" id="codeBlock"><code>#include &lt;U8g2lib.h&gt;
+
+// ================= OLED =================
+
+U8G2_SH1106_128X64_NONAME_F_4W_HW_SPI u8g2(
+  U8G2_R0,
+  /* CS   */ 10,
+  /* DC   */ 9,
+  /* RESET */ 8
+);
+
+// ================= PINS =================
+
+// Buttons
+const int buttonPins[4] = {2, 3, 4, 5};
+
+// Start button
+const int startButton = 6;
+
+// LEDs
+const int ledPins[4] = {
+  A0, A1, A2, A3
+};
+
+// Speaker / buzzer
+const int speakerPin = 12;
+
+// ================= GAME SETTINGS =================
+
+const int MAX_SEQUENCE = 100;
+
+int sequence[MAX_SEQUENCE];
+
+int level = 1;
+int score = 0;
+
+// Different tones for the four buttons
+int tones[4] = {
+  262,
+  330,
+  392,
+  523
+};
+
+// =================================================
+// OLED MESSAGE
+// =================================================
+
+void showMessage(String line1, String line2 = "", String line3 = "") {
+
+  u8g2.clearBuffer();
+
+  u8g2.setFont(u8g2_font_ncenB08_tr);
+
+  u8g2.drawStr(0, 18, line1.c_str());
+
+  if (line2 != "") {
+    u8g2.drawStr(0, 38, line2.c_str());
+  }
+
+  if (line3 != "") {
+    u8g2.drawStr(0, 58, line3.c_str());
+  }
+
+  u8g2.sendBuffer();
+}
+
+// =================================================
+// LED + SOUND
+// =================================================
+
+void playSignal(int index) {
+
+  digitalWrite(ledPins[index], HIGH);
+
+  tone(speakerPin, tones[index]);
+
+  delay(400);
+
+  digitalWrite(ledPins[index], LOW);
+
+  noTone(speakerPin);
+
+  delay(150);
+}
+
+// =================================================
+// SHOW RANDOM SEQUENCE
+// =================================================
+
+void showSequence() {
+
+  showMessage(
+    "MEMORIZE!",
+    "Watch the",
+    "sequence..."
+  );
+
+  delay(800);
+
+  for (int i = 0; i &lt; level; i++) {
+
+    playSignal(sequence[i]);
+
+    delay(100);
+  }
+}
+
+// =================================================
+// WAIT FOR PLAYER BUTTON
+// =================================================
+
+int waitForButton() {
+
+  while (true) {
+
+    for (int i = 0; i &lt; 4; i++) {
+
+      if (digitalRead(buttonPins[i]) == LOW) {
+
+        playSignal(i);
+
+        // Wait until button is released
+        while (digitalRead(buttonPins[i]) == LOW) {
+          delay(10);
+        }
+
+        return i;
+      }
+    }
+
+    delay(5);
+  }
+}
+
+// =================================================
+// PLAYER TURN
+// =================================================
+
+bool playerTurn() {
+
+  showMessage(
+    "YOUR TURN",
+    ("LEVEL: " + String(level)).c_str(),
+    "Repeat sequence"
+  );
+
+  delay(500);
+
+  for (int i = 0; i &lt; level; i++) {
+
+    int input = waitForButton();
+
+    // Wrong button
+    if (input != sequence[i]) {
+
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// =================================================
+// CORRECT ANSWER
+// =================================================
+
+void successScreen() {
+
+  showMessage(
+    "CORRECT!",
+    ("LEVEL " + String(level)).c_str(),
+    "Get ready..."
+  );
+
+  tone(speakerPin, 784);
+  delay(150);
+
+  tone(speakerPin, 988);
+  delay(150);
+
+  noTone(speakerPin);
+
+  delay(800);
+}
+
+// =================================================
+// GAME OVER
+// =================================================
+
+void gameOver() {
+
+  tone(speakerPin, 180);
+
+  delay(500);
+
+  noTone(speakerPin);
+
+  showMessage(
+    "GAME OVER",
+    ("SCORE: " + String(score)).c_str(),
+    ("LEVEL: " + String(level)).c_str()
+  );
+
+  delay(2500);
+
+  showMessage(
+    "PRESS START",
+    "TO PLAY AGAIN"
+  );
+}
+
+// =================================================
+// WAIT FOR START
+// =================================================
+
+void waitForStart() {
+
+  showMessage(
+    "MIND GAME",
+    "Memory Challenge",
+    "PRESS START"
+  );
+
+  while (digitalRead(startButton) == HIGH) {
+    delay(20);
+  }
+
+  while (digitalRead(startButton) == LOW) {
+    delay(20);
+  }
+
+  delay(300);
+}
+
+// =================================================
+// START NEW GAME
+// =================================================
+
+void newGame() {
+
+  level = 1;
+  score = 0;
+
+  // Generate random sequence
+  for (int i = 0; i &lt; MAX_SEQUENCE; i++) {
+
+    sequence[i] = random(0, 4);
+  }
+
+  showMessage(
+    "GET READY!",
+    "Game starting..."
+  );
+
+  // Start melody
+  tone(speakerPin, 523);
+  delay(150);
+
+  tone(speakerPin, 659);
+  delay(150);
+
+  tone(speakerPin, 784);
+  delay(150);
+
+  noTone(speakerPin);
+
+  delay(800);
+}
+
+// =================================================
+// SETUP
+// =================================================
+
+void setup() {
+
+  // Start OLED
+  u8g2.begin();
+
+  // Buttons and LEDs
+  for (int i = 0; i &lt; 4; i++) {
+
+    pinMode(buttonPins[i], INPUT_PULLUP);
+
+    pinMode(ledPins[i], OUTPUT);
+
+    digitalWrite(ledPins[i], LOW);
+  }
+
+  // Start button
+  pinMode(startButton, INPUT_PULLUP);
+
+  // Speaker
+  pinMode(speakerPin, OUTPUT);
+
+  // Random seed
+  randomSeed(analogRead(A5));
+
+  // Startup screen
+  showMessage(
+    "MIND GAME",
+    "Arduino Memory",
+    "Initializing..."
+  );
+
+  delay(1500);
+}
+
+// =================================================
+// MAIN LOOP
+// =================================================
+
+void loop() {
+
+  // Wait for START
+  waitForStart();
+
+  // Reset game
+  newGame();
+
+  // Game loop
+  while (level &lt;= MAX_SEQUENCE) {
+
+    // Show sequence
+    showSequence();
+
+    // Player repeats sequence
+    if (playerTurn()) {
+
+      // Correct
+      score++;
+
+      successScreen();
+
+      level++;
+
+    } else {
+
+      // Wrong
+      gameOver();
+
+      break;
+    }
+  }
+}</code></pre></div></section>
+<section class="case-section"><div class="case-heading"><small>07 / LEARNING OUTCOMES</small><h2>What this project<br>helped me practice.</h2></div><div class="case-grid"><div class="panel"><h3>Embedded programming</h3><p>Working with digital inputs and outputs, INPUT_PULLUP buttons, OLED graphics, tone generation, delays and random number generation on Arduino.</p></div><div class="panel"><h3>Problem solving</h3><p>The project combines multiple hardware interfaces into one state-driven game loop and requires careful sequence checking, feedback and user interaction.</p></div></div></section>
+<section class="case-section"><div class="case-heading"><small>08 / FUTURE IMPROVEMENTS</small><h2>Where the game<br>could go next.</h2></div><div class="case-grid"><div class="panel"><h3>More game modes</h3><p>Add timed mode, difficulty selection, lives, high-score storage and different sequence speeds.</p></div><div class="panel"><h3>Better feedback</h3><p>Add animations, score history, sound effects and richer OLED graphics for a more polished game experience.</p></div></div></section>
+<section class="case-section"><div class="final-box"><h3>Mind Game — Arduino Memory Challenge</h3><p>This project demonstrates how a small microcontroller can combine sensors or inputs, visual feedback, audio feedback and a display into a complete interactive embedded system.</p></div></section>
+</main>
+<footer class="container"><span>© 2026 YADUNAND</span><a href="index.html#work">BACK TO WORK ↑</a></footer>
+<script src="script.js"></script>
+</body>
+</html>

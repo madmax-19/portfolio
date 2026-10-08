@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<meta
+name="description"
+content="Automatic Object Counting System — Yadunand project case study"
+>
+
+<title>
+Automatic Object Counter — Yadunand
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com"
+>
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+rel="stylesheet"
+>
+
+<link rel="stylesheet" href="style.css">
+
+
+<style>
+
+.project-page{
+padding-top:125px;
+padding-bottom:100px
+}
+
+.back{
+display:inline-flex;
+align-items:center;
+gap:9px;
+color:var(--muted);
+font-size:11px;
+margin-bottom:45px
+}
+
+.back:hover{
+color:var(--green)
+}
+
+.project-hero{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:50px;
+align-items:center;
+padding-bottom:90px;
+border-bottom:1px solid var(--line)
+}
+
+.project-kicker{
+color:var(--green);
+font-size:10px;
+letter-spacing:.2em;
+font-weight:700
+}
+
+.project-hero h1{
+font:700 clamp(48px,6.5vw,88px)/.96 "Space Grotesk";
+letter-spacing:-.06em;
+margin:18px 0
+}
+
+.project-hero h1 em{
+color:var(--green);
+font-style:normal
+}
+
+.project-hero p{
+max-width:650px;
+color:var(--muted);
+font-size:15px
+}
+
+.hero-device{
+height:390px;
+border:1px solid var(--line);
+border-radius:18px;
+background:
+radial-gradient(
+circle at 50% 35%,
+#1b2815,
+#0b0d0e 65%
+);
+display:grid;
+place-items:center;
+position:relative;
+overflow:hidden
+}
+
+.hero-device:before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+transparent 49%,
+#b0ff4210 50%,
+transparent 51%
+);
+background-size:100% 22px
+}
+
+.device{
+width:250px;
+height:250px;
+border:1px solid #b0ff4238;
+border-radius:24px;
+background:#0e120d;
+box-shadow:0 30px 80px #0008;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+position:relative
+}
+
+.device-screen{
+width:180px;
+height:95px;
+border:5px solid #252b27;
+background:#071007;
+padding:12px;
+color:var(--green);
+font:9px monospace
+}
+
+.device-screen b{
+display:block;
+font-size:28px;
+margin:5px 0
+}
+
+.device-button{
+margin-top:22px;
+width:50px;
+height:20px;
+border:1px solid #5c6c56;
+border-radius:5px
+}
+
+.specs{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin:35px 0 0
+}
+
+.spec{
+border:1px solid var(--line);
+background:var(--card);
+padding:18px;
+border-radius:10px
+}
+
+.spec small{
+display:block;
+color:#656c76;
+font-size:8px;
+letter-spacing:.14em
+}
+
+.spec b{
+display:block;
+margin-top:8px;
+font:600 15px "Space Grotesk"
+}
+
+.case-section{
+padding-top:105px
+}
+
+.case-heading{
+margin-bottom:35px
+}
+
+.case-heading small{
+color:var(--green);
+font-size:10px;
+letter-spacing:.18em
+}
+
+.case-heading h2{
+font:700 clamp(38px,5vw,62px)/1 "Space Grotesk";
+letter-spacing:-.05em;
+margin-top:13px
+}
+
+.case-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px
+}
+
+.panel{
+border:1px solid var(--line);
+background:var(--card);
+border-radius:14px;
+padding:25px
+}
+
+.panel h3{
+font:600 22px "Space Grotesk";
+margin-bottom:12px
+}
+
+.panel p,
+.panel li{
+color:var(--muted);
+font-size:13px
+}
+
+.panel ul{
+padding-left:18px
+}
+
+.panel li{
+margin:7px 0
+}
+
+.flow{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+margin-top:20px
+}
+
+.flow div{
+text-align:center;
+border:1px solid var(--line);
+padding:16px 7px;
+border-radius:8px;
+background:var(--card2);
+font-size:9px;
+color:var(--muted)
+}
+
+.flow b{
+display:block;
+color:var(--green);
+font-size:18px;
+margin-bottom:5px
+}
+
+.pin-table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px;
+font-size:12px
+}
+
+.pin-table th,
+.pin-table td{
+text-align:left;
+padding:11px;
+border-bottom:1px solid var(--line)
+}
+
+.pin-table th{
+color:var(--green);
+font-size:9px;
+letter-spacing:.1em
+}
+
+.pin-table td{
+color:var(--muted)
+}
+
+.logic{
+display:grid;
+gap:9px;
+margin-top:18px
+}
+
+.logic div{
+padding:12px 15px;
+border:1px solid var(--line);
+border-radius:7px;
+background:var(--card2);
+font:11px monospace;
+color:#aab0b8
+}
+
+.logic strong{
+color:var(--green)
+}
+
+.oled-demo{
+display:grid;
+place-items:center;
+min-height:230px;
+background:#080a09;
+border:1px solid var(--line);
+border-radius:10px
+}
+
+.oled-screen{
+width:260px;
+height:135px;
+border:8px solid #272d28;
+border-radius:7px;
+background:#061006;
+color:var(--green);
+padding:14px;
+font:10px monospace
+}
+
+.oled-screen b{
+display:block;
+text-align:center;
+font-size:35px;
+margin:12px 0
+}
+
+.code-wrap{
+position:relative
+}
+
+.copy-btn{
+position:absolute;
+right:15px;
+top:15px;
+background:var(--green);
+border:0;
+color:#0a0d08;
+padding:8px 11px;
+border-radius:6px;
+font-size:10px;
+font-weight:700;
+cursor:pointer
+}
+
+.code{
+max-height:620px;
+overflow:auto;
+background:#080a0b;
+border:1px solid var(--line);
+border-radius:10px;
+padding:22px;
+color:#bbc1c9;
+font:11px/1.7 Consolas,monospace;
+white-space:pre
+}
+
+.code .kw{
+color:#c58cff
+}
+
+.code .str{
+color:#9edb6b
+}
+
+.code .num{
+color:#63e7ff
+}
+
+.gallery{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:12px
+}
+
+.gallery-box{
+min-height:220px;
+border:1px dashed #ffffff20;
+border-radius:12px;
+display:grid;
+place-items:center;
+background:var(--card);
+color:#626974;
+font-size:10px;
+letter-spacing:.12em
+}
+
+.gallery-box.large{
+min-height:360px
+}
+
+.final-box{
+border:1px solid #b0ff4230;
+background:
+linear-gradient(
+145deg,
+#151d10,
+var(--card)
+);
+border-radius:15px;
+padding:35px
+}
+
+
+@media(max-width:800px){
+
+.project-hero,
+.case-grid{
+grid-template-columns:1fr
+}
+
+.hero-device{
+height:320px
+}
+
+.specs{
+grid-template-columns:1fr 1fr
+}
+
+.flow{
+grid-template-columns:1fr 1fr
+}
+
+.gallery{
+grid-template-columns:1fr
+}
+
+.gallery-box.large{
+min-height:230px
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="noise"></div>
+
+
+<header>
+
+<nav class="nav container">
+
+<a class="logo" href="index.html">
+<span>Y</span> YADUNAND
+</a>
+
+<div class="links">
+
+<a href="index.html#home">
+Home
+</a>
+
+<a href="index.html#about">
+About
+</a>
+
+<a href="index.html#work">
+Work
+</a>
+
+<a href="index.html#ideas">
+Ideas
+</a>
+
+<a href="index.html#contact">
+Contact
+</a>
+
+</div>
+
+<div class="nav-actions">
+
+<button id="theme">
+◐
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<main class="project-page container">
+
+
+<a class="back" href="index.html#work">
+← BACK TO WORK
+</a>
+
+
+<section class="project-hero">
+
+<div>
+
+<div class="project-kicker">
+PROJECT 02 / INDUSTRIAL AUTOMATION
+</div>
+
+<h1>
+AUTOMATIC<br>
+<em>OBJECT COUNTER.</em>
+</h1>
+
+<p>
+A portable Arduino UNO based automatic object counting system designed as a small-scale industrial automation prototype. It uses contactless ultrasonic detection, a 1.3-inch SH1106 OLED interface, a START button and audible feedback.
+</p>
+
+<div class="actions">
+
+<a class="button main-btn" href="#code">
+View code ↓
+</a>
+
+<a class="button" href="#hardware">
+Explore hardware
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-device">
+
+<div class="device">
+
+<div class="device-screen">
+
+<span>
+OBJECT COUNTER
+</span>
+
+<b>
+05
+</b>
+
+<span>
+8cm • DETECTED
+</span>
+
+</div>
+
+<div class="device-button"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="specs">
+
+<div class="spec">
+<small>CONTROLLER</small>
+<b>Arduino UNO</b>
+</div>
+
+<div class="spec">
+<small>SENSOR</small>
+<b>HC-SR04</b>
+</div>
+
+<div class="spec">
+<small>DISPLAY</small>
+<b>SH1106 OLED</b>
+</div>
+
+<div class="spec">
+<small>DETECTION</small>
+<b>10 / 15 cm</b>
+</div>
+
+</div>
+
+
+<section class="case-section" id="overview">
+
+<div class="case-heading">
+
+<small>
+01 / OVERVIEW
+</small>
+
+<h2>
+From distance<br>
+to a useful count.
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+<div class="panel">
+
+<h3>
+The idea
+</h3>
+
+<p>
+The system starts in an OFF state. Pressing START begins monitoring. When an object enters the 10 cm detection zone, the count increases and the buzzer gives a short beep. The object must move to at least 15 cm before another count can happen.
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+Why the 10 / 15 cm thresholds?
+</h3>
+
+<p>
+The two thresholds create a simple hysteresis band. This prevents the same object from being counted repeatedly when ultrasonic measurements fluctuate around the detection point.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section" id="how">
+
+<div class="case-heading">
+
+<small>
+02 / HOW IT WORKS
+</small>
+
+<h2>
+The system flow.
+</h2>
+
+</div>
+
+
+<div class="panel">
+
+<div class="flow">
+
+<div>
+<b>01</b>
+POWER ON
+</div>
+
+<div>
+<b>02</b>
+PRESS START
+</div>
+
+<div>
+<b>03</b>
+MEASURE DISTANCE
+</div>
+
+<div>
+<b>04</b>
+COUNT + BEEP
+</div>
+
+<div>
+<b>05</b>
+RELEASE ≥15cm
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section" id="hardware">
+
+<div class="case-heading">
+
+<small>
+03 / HARDWARE
+</small>
+
+<h2>
+Inside the prototype.
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+<div class="panel">
+
+<h3>
+Components
+</h3>
+
+<ul>
+
+<li>
+Arduino UNO — main controller
+</li>
+
+<li>
+HC-SR04 — contactless distance measurement
+</li>
+
+<li>
+DST-013 E2 1.3-inch 128×64 SPI OLED — SH1106
+</li>
+
+<li>
+Push button — START control
+</li>
+
+<li>
+Buzzer — audible feedback
+</li>
+
+<li>
+Two 3.7 V Li-ion batteries + 2S BMS
+</li>
+
+<li>
+2-cell holder, breadboard and jumper wires
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+Pin configuration
+</h3>
+
+<table class="pin-table">
+
+<tr>
+<th>MODULE</th>
+<th>PIN</th>
+</tr>
+
+<tr>
+<td>HC-SR04 TRIG</td>
+<td>D2</td>
+</tr>
+
+<tr>
+<td>HC-SR04 ECHO</td>
+<td>D3</td>
+</tr>
+
+<tr>
+<td>START BUTTON</td>
+<td>D4 → GND</td>
+</tr>
+
+<tr>
+<td>OLED CS</td>
+<td>D5</td>
+</tr>
+
+<tr>
+<td>OLED DC</td>
+<td>D6</td>
+</tr>
+
+<tr>
+<td>OLED RES</td>
+<td>D7</td>
+</tr>
+
+<tr>
+<td>BUZZER</td>
+<td>D8</td>
+</tr>
+
+<tr>
+<td>OLED MOSI / D1</td>
+<td>D11</td>
+</tr>
+
+<tr>
+<td>OLED SCK / D0</td>
+<td>D13</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section">
+
+<div class="case-heading">
+
+<small>
+04 / DETECTION LOGIC
+</small>
+
+<h2>
+Simple logic.<br>
+Reliable behavior.
+</h2>
+
+</div>
+
+
+<div class="panel">
+
+<div class="logic">
+
+<div>
+<strong>IF</strong>
+distance ≤ 10 cm
+<strong>AND</strong>
+objectDetected = false
+</div>
+
+<div>
+<strong>THEN</strong>
+objectCount++ →
+objectDetected = true →
+beep
+</div>
+
+<div>
+<strong>ELSE IF</strong>
+distance ≥ 15 cm →
+objectDetected = false
+</div>
+
+<div>
+<strong>RESULT</strong>
+the next object can now be counted
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section">
+
+<div class="case-heading">
+
+<small>
+05 / OLED INTERFACE
+</small>
+
+<h2>
+A small screen<br>
+with useful feedback.
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+<div class="panel">
+
+<h3>
+Startup
+</h3>
+
+<div class="oled-demo">
+
+<div class="oled-screen">
+
+OBJECT COUNTER
+
+<br>
+
+<hr>
+
+<b>
+SYSTEM OFF
+</b>
+
+<center>
+[ START ]
+</center>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+Running
+</h3>
+
+<div class="oled-demo">
+
+<div class="oled-screen">
+
+OBJECT COUNTER
+
+<br>
+
+<hr>
+
+<b>
+05
+</b>
+
+<center>
+8cm • OBJECT DETECTED
+</center>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section" id="code">
+
+<div class="case-heading">
+
+<small>
+06 / SOURCE CODE
+</small>
+
+<h2>
+The Arduino<br>
+<em>implementation.</em>
+</h2>
+
+</div>
+
+
+<div class="panel code-wrap">
+
+<button class="copy-btn" id="copy">
+COPY CODE
+</button>
+
+<pre class="code" id="source">#include &lt;U8g2lib.h&gt;
+#include &lt;SPI.h&gt;
+
+U8G2_SH1106_128X64_NONAME_1_4W_HW_SPI oled(
+  U8G2_R0, 5, 6, 7
+);
+
+#define TRIG_PIN 2
+#define ECHO_PIN 3
+#define START_BUTTON 4
+#define BUZZER_PIN 8
+
+const int DETECT_DISTANCE = 10;
+const int RELEASE_DISTANCE = 15;
+
+int objectCount = 0;
+bool objectDetected = false;
+bool systemStarted = false;
+
+float getDistance()
+{
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  long duration = pulseIn(ECHO_PIN, HIGH, 30000);
+
+  if (duration == 0) return 999;
+
+  return duration * 0.0343 / 2.0;
+}
+
+void beep()
+{
+  tone(BUZZER_PIN, 2000);
+  delay(80);
+  noTone(BUZZER_PIN);
+}
+
+void setup()
+{
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(START_BUTTON, INPUT_PULLUP);
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  digitalWrite(BUZZER_PIN, LOW);
+  noTone(BUZZER_PIN);
+
+  oled.begin();
+}
+
+void loop()
+{
+  if (!systemStarted)
+  {
+    if (digitalRead(START_BUTTON) == LOW)
+    {
+      delay(50);
+
+      if (digitalRead(START_BUTTON) == LOW)
+      {
+        systemStarted = true;
+        objectCount = 0;
+        objectDetected = false;
+        beep();
+        delay(300);
+      }
+    }
+    return;
+  }
+
+  float distance = getDistance();
+
+  if (distance &lt;= DETECT_DISTANCE)
+  {
+    if (!objectDetected)
+    {
+      objectCount++;
+      objectDetected = true;
+      beep();
+    }
+  }
+  else if (distance &gt;= RELEASE_DISTANCE)
+  {
+    objectDetected = false;
+  }
+
+  delay(80);
+}</pre>
+
+</div>
+
+</section>
+
+
+<section class="case-section">
+
+<div class="case-heading">
+
+<small>
+07 / APPLICATIONS
+</small>
+
+<h2>
+Where this idea<br>
+could go.
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+<div class="panel">
+
+<h3>
+Industrial use cases
+</h3>
+
+<ul>
+
+<li>
+Factory production lines
+</li>
+
+<li>
+Package and product counting
+</li>
+
+<li>
+Warehouse / logistics counting
+</li>
+
+<li>
+Component counting
+</li>
+
+<li>
+Entry / exit counting
+</li>
+
+<li>
+Smart-factory prototypes
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+Future improvements
+</h3>
+
+<ul>
+
+<li>
+Conveyor belt integration
+</li>
+
+<li>
+Automatic object sorting
+</li>
+
+<li>
+SD-card data logging
+</li>
+
+<li>
+IoT / cloud monitoring
+</li>
+
+<li>
+Mobile app
+</li>
+
+<li>
+Multiple sensors for improved accuracy
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section">
+
+<div class="case-heading">
+
+<small>
+08 / GALLERY
+</small>
+
+<h2>
+Prototype<br>
+documentation.
+</h2>
+
+</div>
+
+
+<div class="gallery">
+
+<div class="gallery-box large">
+ADD PROJECT PHOTO HERE
+</div>
+
+<div>
+
+<div class="gallery-box">
+WIRING PHOTO
+</div>
+
+<br>
+
+<div class="gallery-box">
+OLED PHOTO
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="case-section">
+
+<div class="final-box">
+
+<div class="case-heading">
+
+<small>
+09 / FINAL SUMMARY
+</small>
+
+<h2>
+Small prototype.<br>
+<em>Real automation thinking.</em>
+</h2>
+
+</div>
+
+<p
+style="color:var(--muted);max-width:760px;font-size:14px"
+>
+This project demonstrates how a microcontroller, distance sensor, display and simple state logic can be combined into a portable automation prototype. The design focuses on contactless detection, clear feedback and reliable counting behavior.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="container">
+
+<span>
+© 2026 YADUNAND
+</span>
+
+<a href="index.html#work">
+← BACK TO PORTFOLIO
+</a>
+
+</footer>
+
+
+<script>
+
+document.getElementById("theme").onclick=()=>{
+
+document.body.classList.toggle("light");
+
+document.getElementById("theme").textContent=
+document.body.classList.contains("light")
+?"☀"
+:"◐";
+
+};
+
+
+const code=
+document.getElementById("source").innerText;
+
+
+document.getElementById("copy").onclick=async()=>{
+
+await navigator.clipboard.writeText(code);
+
+document.getElementById("copy").textContent=
+"COPIED ✓";
+
+setTimeout(
+()=>document.getElementById("copy").textContent="COPY CODE",
+1500
+);
+
+};
+
+</script>
+
+</body>
+</html>

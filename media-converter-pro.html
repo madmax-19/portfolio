@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Media Converter Pro — Yadunand project case study"
+>
+
+<title>
+Media Converter Pro — Yadunand
+</title>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<link rel="stylesheet" href="style.css">
+
+
+<style>
+
+/* =========================================
+   MEDIA CONVERTER PRO PROJECT PAGE
+========================================= */
+
+.project-page{
+    padding-top:125px;
+    padding-bottom:100px;
+}
+
+
+/* Back button */
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-bottom:45px;
+
+    transition:.25s;
+}
+
+.back:hover{
+    color:var(--green);
+}
+
+
+/* =========================================
+   PROJECT HERO
+========================================= */
+
+.project-hero{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+
+    gap:55px;
+
+    align-items:center;
+
+    padding-bottom:90px;
+
+    border-bottom:1px solid var(--line);
+}
+
+.project-kicker{
+    color:var(--green);
+
+    font-size:10px;
+
+    letter-spacing:.2em;
+
+    font-weight:700;
+}
+
+.project-hero h1{
+    font:700 clamp(48px,6.5vw,88px)/.96 "Space Grotesk";
+
+    letter-spacing:-.06em;
+
+    margin:18px 0 25px;
+}
+
+.project-hero h1 em{
+    color:var(--green);
+    font-style:normal;
+}
+
+.project-hero p{
+    max-width:650px;
+
+    color:var(--muted);
+
+    font-size:15px;
+}
+
+
+/* =========================================
+   CONVERTER UI PREVIEW
+========================================= */
+
+.converter-preview{
+
+    min-height:440px;
+
+    border:1px solid var(--line);
+
+    border-radius:18px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0,
+            #b0ff4212,
+            transparent 55%
+        ),
+        #0b0d0e;
+
+    padding:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+        inset 0 0 80px #0006,
+        0 30px 80px #0005;
+}
+
+.converter-preview:before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            transparent 96%,
+            #ffffff08 96%
+        );
+
+    background-size:100% 28px;
+
+    pointer-events:none;
+}
+
+
+/* Main converter window */
+
+.converter-window{
+
+    width:min(430px,100%);
+
+    border:1px solid #ffffff15;
+
+    border-radius:13px;
+
+    background:#111419ee;
+
+    padding:22px;
+
+    position:relative;
+
+    z-index:2;
+
+    box-shadow:
+        0 25px 70px #0009;
+}
+
+
+/* Window header */
+
+.converter-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.converter-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font:700 11px "Space Grotesk";
+
+    letter-spacing:.08em;
+}
+
+.converter-logo i{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:0 0 12px var(--green);
+}
+
+.converter-status{
+
+    color:var(--green);
+
+    font:8px monospace;
+
+    letter-spacing:.08em;
+}
+
+
+/* URL box */
+
+.url-box{
+
+    border:1px solid #ffffff15;
+
+    background:#090b0c;
+
+    border-radius:7px;
+
+    padding:13px;
+
+    color:#626b75;
+
+    font:10px monospace;
+
+    margin-bottom:13px;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+}
+
+
+/* Options */
+
+.converter-options{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:9px;
+
+    margin-bottom:13px;
+}
+
+.option{
+
+    border:1px solid #ffffff12;
+
+    background:#0b0e10;
+
+    border-radius:7px;
+
+    padding:10px;
+}
+
+.option small{
+
+    display:block;
+
+    color:#5d6670;
+
+    font-size:7px;
+
+    letter-spacing:.1em;
+
+    margin-bottom:4px;
+}
+
+.option b{
+
+    color:#d9dde2;
+
+    font:600 10px "Space Grotesk";
+}
+
+
+/* Convert button */
+
+.convert-demo{
+
+    width:100%;
+
+    border:0;
+
+    border-radius:7px;
+
+    padding:11px;
+
+    background:var(--green);
+
+    color:#0a0e07;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.04em;
+}
+
+
+/* Progress */
+
+.progress-demo{
+
+    margin-top:16px;
+}
+
+.progress-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#737c86;
+
+    font:8px monospace;
+
+    margin-bottom:6px;
+}
+
+.progress-info b{
+    color:var(--green);
+}
+
+.progress-track{
+
+    height:5px;
+
+    background:#20251e;
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+.progress-fill{
+
+    width:78%;
+
+    height:100%;
+
+    background:var(--green);
+
+    box-shadow:0 0 12px #b0ff4266;
+}
+
+
+/* =========================================
+   SPECS
+========================================= */
+
+.specs{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:12px;
+
+    margin:35px 0 0;
+}
+
+.spec{
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    padding:18px;
+
+    border-radius:10px;
+}
+
+.spec small{
+
+    display:block;
+
+    color:#656c76;
+
+    font-size:8px;
+
+    letter-spacing:.14em;
+}
+
+.spec b{
+
+    display:block;
+
+    margin-top:8px;
+
+    font:600 15px "Space Grotesk";
+}
+
+
+/* =========================================
+   CASE STUDY
+========================================= */
+
+.case-section{
+
+    padding-top:105px;
+}
+
+.case-heading{
+
+    margin-bottom:35px;
+}
+
+.case-heading small{
+
+    color:var(--green);
+
+    font-size:10px;
+
+    letter-spacing:.18em;
+}
+
+.case-heading h2{
+
+    font:700 clamp(38px,5vw,62px)/1 "Space Grotesk";
+
+    letter-spacing:-.05em;
+
+    margin-top:13px;
+}
+
+.case-heading h2 em{
+
+    color:var(--green);
+
+    font-style:normal;
+}
+
+
+/* =========================================
+   PANELS
+========================================= */
+
+.case-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:16px;
+}
+
+.panel{
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    border-radius:14px;
+
+    padding:25px;
+}
+
+.panel h3{
+
+    font:600 22px "Space Grotesk";
+
+    margin-bottom:12px;
+}
+
+.panel p,
+.panel li{
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+.panel ul{
+
+    padding-left:18px;
+}
+
+.panel li{
+
+    margin:8px 0;
+}
+
+
+/* =========================================
+   ARCHITECTURE
+========================================= */
+
+.architecture{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:8px;
+
+    margin-top:20px;
+}
+
+.arch-box{
+
+    text-align:center;
+
+    border:1px solid var(--line);
+
+    padding:18px 8px;
+
+    border-radius:8px;
+
+    background:var(--card2);
+
+    font-size:9px;
+
+    color:var(--muted);
+
+    position:relative;
+}
+
+.arch-box b{
+
+    display:block;
+
+    color:var(--green);
+
+    font-size:18px;
+
+    margin-bottom:7px;
+}
+
+.arch-box:not(:last-child):after{
+
+    content:"→";
+
+    position:absolute;
+
+    right:-13px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--green);
+
+    z-index:3;
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.feature-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+}
+
+.feature{
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    border-radius:11px;
+
+    padding:20px;
+}
+
+.feature-number{
+
+    color:#555d67;
+
+    font:10px "Space Grotesk";
+}
+
+.feature h3{
+
+    font:600 19px "Space Grotesk";
+
+    margin:8px 0;
+}
+
+.feature p{
+
+    color:var(--muted);
+
+    font-size:12px;
+}
+
+
+/* =========================================
+   FORMAT CARDS
+========================================= */
+
+.format-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+}
+
+.format-card{
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    border-radius:14px;
+
+    padding:30px;
+}
+
+.format-icon{
+
+    width:52px;
+
+    height:52px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:1px solid #b0ff4230;
+
+    border-radius:10px;
+
+    color:var(--green);
+
+    font:700 14px "Space Grotesk";
+
+    margin-bottom:18px;
+}
+
+.format-card h3{
+
+    font:600 25px "Space Grotesk";
+
+    margin-bottom:7px;
+}
+
+.format-card p{
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+
+/* =========================================
+   WEBSOCKET PROGRESS
+========================================= */
+
+.progress-panel{
+
+    border:1px solid var(--line);
+
+    background:#0c0f10;
+
+    border-radius:12px;
+
+    padding:25px;
+}
+
+.progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+    font-size:11px;
+}
+
+.progress-header b{
+
+    color:var(--green);
+}
+
+.big-progress{
+
+    height:8px;
+
+    border-radius:10px;
+
+    background:#20251e;
+
+    overflow:hidden;
+}
+
+.big-progress div{
+
+    width:78%;
+
+    height:100%;
+
+    background:var(--green);
+
+    box-shadow:0 0 15px #b0ff4266;
+}
+
+.progress-status{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:10px;
+
+    color:#68717a;
+
+    font:9px monospace;
+}
+
+
+/* =========================================
+   STACK
+========================================= */
+
+.tech-stack{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    border-top:1px solid var(--line);
+
+    border-left:1px solid var(--line);
+}
+
+.tech{
+
+    padding:22px;
+
+    border-right:1px solid var(--line);
+
+    border-bottom:1px solid var(--line);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font:600 13px "Space Grotesk";
+}
+
+.tech span{
+
+    color:#5d646e;
+
+    font-size:8px;
+}
+
+
+/* =========================================
+   FUTURE
+========================================= */
+
+.future-list{
+
+    border-top:1px solid var(--line);
+}
+
+.future{
+
+    display:grid;
+
+    grid-template-columns:55px 1fr;
+
+    gap:20px;
+
+    padding:25px 0;
+
+    border-bottom:1px solid var(--line);
+}
+
+.future-number{
+
+    color:#555d67;
+
+    font:11px "Space Grotesk";
+}
+
+.future h3{
+
+    font:600 20px "Space Grotesk";
+
+    margin-bottom:5px;
+}
+
+.future p{
+
+    color:var(--muted);
+
+    font-size:12px;
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.final-box{
+
+    border:1px solid #b0ff4230;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151d10,
+            var(--card)
+        );
+
+    border-radius:15px;
+
+    padding:40px;
+}
+
+.final-box p{
+
+    color:var(--muted);
+
+    max-width:760px;
+
+    font-size:14px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:900px){
+
+    .project-hero{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .specs{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .architecture{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .arch-box:not(:last-child):after{
+
+        display:none;
+
+    }
+
+    .case-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .feature-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .tech-stack{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .project-page{
+
+        padding-top:110px;
+
+    }
+
+    .converter-preview{
+
+        min-height:360px;
+
+        padding:15px;
+
+    }
+
+    .converter-window{
+
+        padding:16px;
+
+    }
+
+    .specs{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .architecture{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .format-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .tech-stack{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .final-box{
+
+        padding:25px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="noise"></div>
+
+
+<header>
+
+<nav class="nav container">
+
+<a class="logo" href="index.html">
+
+<span>Y</span> YADUNAND
+
+</a>
+
+
+<div class="links">
+
+<a href="index.html#home">
+Home
+</a>
+
+<a href="index.html#about">
+About
+</a>
+
+<a href="index.html#work">
+Work
+</a>
+
+<a href="index.html#ideas">
+Ideas
+</a>
+
+<a href="index.html#contact">
+Contact
+</a>
+
+</div>
+
+
+<div class="nav-actions">
+
+<button id="theme">
+◐
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<main class="project-page container">
+
+
+<!-- BACK -->
+
+<a
+class="back"
+href="index.html#work"
+>
+← BACK TO WORK
+</a>
+
+
+<!-- HERO -->
+
+<section class="project-hero">
+
+
+<div>
+
+<div class="project-kicker">
+PROJECT 01 / WEB + PYTHON
+</div>
+
+
+<h1>
+
+MEDIA<br>
+
+<em>CONVERTER PRO.</em>
+
+</h1>
+
+
+<p>
+
+A web-based media conversion and download application built with Python FastAPI. The system accepts supported YouTube and Instagram URLs, processes media through yt-dlp and FFmpeg, tracks progress in real time and provides the completed file for download.
+
+</p>
+
+
+<div class="actions">
+
+<a
+class="button main-btn"
+href="#architecture"
+>
+Explore architecture ↓
+</a>
+
+<a
+class="button"
+href="#features"
+>
+Features
+</a>
+
+</div>
+
+</div>
+
+
+<!-- UI PREVIEW -->
+
+<div class="converter-preview">
+
+<div class="converter-window">
+
+
+<div class="converter-top">
+
+<div class="converter-logo">
+
+<i></i>
+
+MEDIA CONVERTER PRO
+
+</div>
+
+
+<div class="converter-status">
+SYSTEM READY
+</div>
+
+</div>
+
+
+<div class="url-box">
+
+https://youtube.com/watch?v=example
+
+</div>
+
+
+<div class="converter-options">
+
+
+<div class="option">
+
+<small>
+FORMAT
+</small>
+
+<b>
+MP4 ▾
+</b>
+
+</div>
+
+
+<div class="option">
+
+<small>
+QUALITY
+</small>
+
+<b>
+1080p ▾
+</b>
+
+</div>
+
+</div>
+
+
+<div class="convert-demo">
+CONVERT / DOWNLOAD
+</div>
+
+
+<div class="progress-demo">
+
+<div class="progress-info">
+
+<span>
+DOWNLOADING
+</span>
+
+<b>
+78%
+</b>
+
+</div>
+
+
+<div class="progress-track">
+
+<div class="progress-fill"></div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SPECS -->
+
+<div class="specs">
+
+
+<div class="spec">
+
+<small>
+BACKEND
+</small>
+
+<b>
+FastAPI
+</b>
+
+</div>
+
+
+<div class="spec">
+
+<small>
+DOWNLOADER
+</small>
+
+<b>
+yt-dlp
+</b>
+
+</div>
+
+
+<div class="spec">
+
+<small>
+PROCESSING
+</small>
+
+<b>
+FFmpeg
+</b>
+
+</div>
+
+
+<div class="spec">
+
+<small>
+REAL-TIME
+</small>
+
+<b>
+WebSockets
+</b>
+
+</div>
+
+
+</div>
+
+
+<!-- OVERVIEW -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+01 / OVERVIEW
+</small>
+
+<h2>
+Turning a media URL<br>
+into a <em>usable file.</em>
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+
+<div class="panel">
+
+<h3>
+The idea
+</h3>
+
+<p>
+
+Media Converter Pro is designed as a simple web interface for converting supported YouTube and Instagram media into downloadable MP4 or MP3 files. The browser communicates with a Python FastAPI backend, which handles URL validation, media extraction, processing and file delivery.
+
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+Why this project?
+</h3>
+
+<p>
+
+The project combines web development with real backend processing. Instead of creating a static interface, it connects a frontend to yt-dlp, FFmpeg, asynchronous tasks and WebSocket progress updates.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ARCHITECTURE -->
+
+<section
+class="case-section"
+id="architecture"
+>
+
+
+<div class="case-heading">
+
+<small>
+02 / ARCHITECTURE
+</small>
+
+<h2>
+How the system<br>
+<em>works.</em>
+</h2>
+
+</div>
+
+
+<div class="panel">
+
+
+<div class="architecture">
+
+
+<div class="arch-box">
+
+<b>01</b>
+
+BROWSER
+
+</div>
+
+
+<div class="arch-box">
+
+<b>02</b>
+
+FASTAPI
+
+</div>
+
+
+<div class="arch-box">
+
+<b>03</b>
+
+YT-DLP
+
+</div>
+
+
+<div class="arch-box">
+
+<b>04</b>
+
+FFMPEG
+
+</div>
+
+
+<div class="arch-box">
+
+<b>05</b>
+
+DOWNLOAD
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- USER FLOW -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+03 / USER FLOW
+</small>
+
+<h2>
+From URL<br>
+to <em>download.</em>
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+
+<div class="panel">
+
+<h3>
+01 — Input</h3>
+
+<p>
+
+The user opens Media Converter Pro and pastes a supported YouTube or Instagram URL.
+
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+02 — Options
+</h3>
+
+<p>
+
+The user selects the desired output format such as MP4 or MP3 and chooses available quality options.
+
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+03 — Processing
+</h3>
+
+<p>
+
+FastAPI validates the request and starts the media processing task using yt-dlp and FFmpeg when required.
+
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+04 — Progress
+</h3>
+
+<p>
+
+The frontend receives progress information through a WebSocket connection and updates the progress interface without refreshing the page.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section
+class="case-section"
+id="features"
+>
+
+
+<div class="case-heading">
+
+<small>
+04 / FEATURES
+</small>
+
+<h2>
+Built around<br>
+the <em>workflow.</em>
+</h2>
+
+</div>
+
+
+<div class="feature-grid">
+
+
+<div class="feature">
+
+<span class="feature-number">
+01
+</span>
+
+<h3>
+YouTube Support
+</h3>
+
+<p>
+
+Accepts supported YouTube media URLs and sends them to the backend for extraction and processing.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span class="feature-number">
+02
+</span>
+
+<h3>
+Instagram Support
+</h3>
+
+<p>
+
+Supports the project's intended Instagram media workflow through the yt-dlp backend.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span class="feature-number">
+03
+</span>
+
+<h3>
+MP4 Output
+</h3>
+
+<p>
+
+Video output can be generated as MP4, including merging separate video and audio streams when required.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span class="feature-number">
+04
+</span>
+
+<h3>
+MP3 Output
+</h3>
+
+<p>
+
+Audio can be extracted and converted to MP3 through FFmpeg.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span class="feature-number">
+05
+</span>
+
+<h3>
+Live Progress
+</h3>
+
+<p>
+
+WebSockets allow the interface to receive progress and status information while the task is running.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<span class="feature-number">
+06
+</span>
+
+<h3>
+Responsive UI
+</h3>
+
+<p>
+
+The frontend is designed to remain usable across desktop, laptop, tablet and mobile screens.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- FORMATS -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+05 / OUTPUT FORMATS
+</small>
+
+<h2>
+MP4 or <em>MP3.</em>
+</h2>
+
+</div>
+
+
+<div class="format-grid">
+
+
+<div class="format-card">
+
+<div class="format-icon">
+MP4
+</div>
+
+<h3>
+Video
+</h3>
+
+<p>
+
+Designed for video downloads. Depending on the selected quality and available streams, yt-dlp can retrieve compatible video/audio streams and FFmpeg can merge them into the final MP4 file.
+
+</p>
+
+</div>
+
+
+<div class="format-card">
+
+<div class="format-icon">
+MP3
+</div>
+
+<h3>
+Audio
+</h3>
+
+<p>
+
+Designed for audio extraction. The backend can use FFmpeg to convert the downloaded audio into an MP3 output.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- PROGRESS -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+06 / REAL-TIME PROGRESS
+</small>
+
+<h2>
+No guessing.<br>
+See the <em>process.</em>
+</h2>
+
+</div>
+
+
+<div class="progress-panel">
+
+
+<div class="progress-header">
+
+<span>
+MEDIA DOWNLOAD
+</span>
+
+<b>
+78%
+</b>
+
+</div>
+
+
+<div class="big-progress">
+
+<div></div>
+
+</div>
+
+
+<div class="progress-status">
+
+<span>
+DOWNLOADING
+</span>
+
+<span>
+yt-dlp / processing
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TECH STACK -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+07 / TECHNOLOGY
+</small>
+
+<h2>
+The stack behind<br>
+the <em>tool.</em>
+</h2>
+
+</div>
+
+
+<div class="tech-stack">
+
+
+<div class="tech">
+
+Python
+
+<span>01</span>
+
+</div>
+
+
+<div class="tech">
+
+FastAPI
+
+<span>02</span>
+
+</div>
+
+
+<div class="tech">
+
+Uvicorn
+
+<span>03</span>
+
+</div>
+
+
+<div class="tech">
+
+yt-dlp
+
+<span>04</span>
+
+</div>
+
+
+<div class="tech">
+
+FFmpeg
+
+<span>05</span>
+
+</div>
+
+
+<div class="tech">
+
+WebSockets
+
+<span>06</span>
+
+</div>
+
+
+<div class="tech">
+
+Jinja2
+
+<span>07</span>
+
+</div>
+
+
+<div class="tech">
+
+HTML / CSS
+
+<span>08</span>
+
+</div>
+
+
+<div class="tech">
+
+JavaScript
+
+<span>09</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- BACKEND -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+08 / BACKEND
+</small>
+
+<h2>
+The engine behind<br>
+the <em>interface.</em>
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+
+<div class="panel">
+
+<h3>
+FastAPI</h3>
+
+<ul>
+
+<li>
+Serves the main webpage.
+</li>
+
+<li>
+Accepts conversion requests.
+</li>
+
+<li>
+Validates user input.
+</li>
+
+<li>
+Runs yt-dlp.
+</li>
+
+<li>
+Configures FFmpeg.
+</li>
+
+<li>
+Tracks conversion progress.
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+WebSocket Layer
+</h3>
+
+<ul>
+
+<li>
+Creates a connection for a conversion task.
+</li>
+
+<li>
+Sends progress information.
+</li>
+
+<li>
+Reports downloading status.
+</li>
+
+<li>
+Reports processing status.
+</li>
+
+<li>
+Notifies the frontend when processing is complete.
+</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ERROR HANDLING -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+09 / ERROR HANDLING
+</small>
+
+<h2>
+Technical errors<br>
+stay <em>behind the UI.</em>
+</h2>
+
+</div>
+
+
+<div class="case-grid">
+
+
+<div class="panel">
+
+<h3>
+User-friendly errors
+</h3>
+
+<ul>
+
+<li>
+Invalid URL → Please enter a valid YouTube or Instagram URL.
+</li>
+
+<li>
+Unsupported platform → This platform is not supported.
+</li>
+
+<li>
+Download failure → Please check the URL and try again.
+</li>
+
+<li>
+Processing failure → Media processing is temporarily unavailable.
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+What users shouldn't see
+</h3>
+
+<ul>
+
+<li>
+Python tracebacks
+</li>
+
+<li>
+yt-dlp raw logs
+</li>
+
+<li>
+Server filesystem paths
+</li>
+
+<li>
+Internal exceptions
+</li>
+
+<li>
+Environment variables or secrets
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SECURITY -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+10 / SECURITY
+</small>
+
+<h2>
+A downloader needs<br>
+a <em>safe backend.</em>
+</h2>
+
+</div>
+
+
+<div class="panel">
+
+<ul>
+
+<li>
+Validate URLs before processing.
+</li>
+
+<li>
+Restrict supported domains/platforms.
+</li>
+
+<li>
+Sanitize generated filenames.
+</li>
+
+<li>
+Prevent arbitrary filesystem paths.
+</li>
+
+<li>
+Configure FFmpeg safely.
+</li>
+
+<li>
+Apply request rate limiting.
+</li>
+
+<li>
+Clean temporary files.
+</li>
+
+<li>
+Never expose server paths or secrets.
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- FUTURE -->
+
+<section class="case-section">
+
+
+<div class="case-heading">
+
+<small>
+11 / FUTURE
+</small>
+
+<h2>
+Where Media Converter Pro<br>
+could go <em>next.</em>
+</h2>
+
+</div>
+
+
+<div class="future-list">
+
+
+<div class="future">
+
+<div class="future-number">
+01
+</div>
+
+<div>
+
+<h3>
+Better Format Detection
+</h3>
+
+<p>
+Improve automatic detection of available formats and qualities based on the selected media.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="future">
+
+<div class="future-number">
+02
+</div>
+
+<div>
+
+<h3>
+Improved Queue System
+</h3>
+
+<p>
+Allow multiple conversion tasks to be managed cleanly by the backend.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="future">
+
+<div class="future-number">
+03
+</div>
+
+<div>
+
+<h3>
+Better Progress Information
+</h3>
+
+<p>
+Expose useful download speed, ETA and processing states through the WebSocket interface.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="future">
+
+<div class="future-number">
+04
+</div>
+
+<div>
+
+<h3>
+Cleaner Deployment
+</h3>
+
+<p>
+Improve FFmpeg configuration, runtime dependencies and production deployment.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- SUMMARY -->
+
+<section class="case-section">
+
+
+<div class="final-box">
+
+<div class="case-heading">
+
+<small>
+12 / FINAL SUMMARY
+</small>
+
+<h2>
+A media tool built<br>
+from <em>backend to UI.</em>
+</h2>
+
+</div>
+
+
+<p>
+
+Media Converter Pro brings together FastAPI, yt-dlp, FFmpeg, WebSockets and a responsive frontend into one complete web application. The project demonstrates how a modern interface can communicate with a real media-processing backend while keeping progress, errors and downloads clear for the user.
+
+</p>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer class="container">
+
+<span>
+© 2026 YADUNAND
+</span>
+
+<a href="index.html#work">
+← BACK TO PORTFOLIO
+</a>
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   THEME
+========================================= */
+
+const theme =
+document.getElementById("theme");
+
+if(theme){
+
+    theme.onclick = () => {
+
+        document.body.classList.toggle("light");
+
+        theme.textContent =
+            document.body.classList.contains("light")
+                ? "☀"
+                : "◐";
+
+    };
+
+}
+
+</script>
+
+</body>
+
+</html>
