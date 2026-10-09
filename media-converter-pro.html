@@ -35,7 +35,7 @@ Media Converter Pro — Yadunand
     rel="stylesheet"
 >
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=unified-ui-1">
 
 
 <style>
@@ -135,10 +135,10 @@ Media Converter Pro — Yadunand
     background:
         radial-gradient(
             circle at 50% 0,
-            #b0ff4212,
+            #b48cff12,
             transparent 55%
         ),
-        #0b0d0e;
+        #0b0b12;
 
     padding:25px;
 
@@ -255,7 +255,7 @@ Media Converter Pro — Yadunand
 
     border:1px solid #ffffff15;
 
-    background:#090b0c;
+    background:#0a0911;
 
     border-radius:7px;
 
@@ -290,7 +290,7 @@ Media Converter Pro — Yadunand
 
     border:1px solid #ffffff12;
 
-    background:#0b0e10;
+    background:#0c0b13;
 
     border-radius:7px;
 
@@ -332,7 +332,7 @@ Media Converter Pro — Yadunand
 
     background:var(--green);
 
-    color:#0a0e07;
+    color:#0b0912;
 
     font-size:10px;
 
@@ -370,7 +370,7 @@ Media Converter Pro — Yadunand
 
     height:5px;
 
-    background:#20251e;
+    background:#22202e;
 
     border-radius:10px;
 
@@ -385,7 +385,7 @@ Media Converter Pro — Yadunand
 
     background:var(--green);
 
-    box-shadow:0 0 12px #b0ff4266;
+    box-shadow:0 0 12px #b48cff66;
 }
 
 
@@ -419,7 +419,7 @@ Media Converter Pro — Yadunand
 
     display:block;
 
-    color:#656c76;
+    color:#7d8798;
 
     font-size:8px;
 
@@ -669,7 +669,7 @@ Media Converter Pro — Yadunand
 
     place-items:center;
 
-    border:1px solid #b0ff4230;
+    border:1px solid #b48cff30;
 
     border-radius:10px;
 
@@ -703,7 +703,7 @@ Media Converter Pro — Yadunand
 
     border:1px solid var(--line);
 
-    background:#0c0f10;
+    background:#0e0b15;
 
     border-radius:12px;
 
@@ -732,7 +732,7 @@ Media Converter Pro — Yadunand
 
     border-radius:10px;
 
-    background:#20251e;
+    background:#22202e;
 
     overflow:hidden;
 }
@@ -745,7 +745,7 @@ Media Converter Pro — Yadunand
 
     background:var(--green);
 
-    box-shadow:0 0 15px #b0ff4266;
+    box-shadow:0 0 15px #b48cff66;
 }
 
 .progress-status{
@@ -850,12 +850,12 @@ Media Converter Pro — Yadunand
 
 .final-box{
 
-    border:1px solid #b0ff4230;
+    border:1px solid #b48cff30;
 
     background:
         linear-gradient(
             145deg,
-            #151d10,
+            #171021,
             var(--card)
         );
 
@@ -981,60 +981,31 @@ Media Converter Pro — Yadunand
 
 </style>
 
+
+<link rel="stylesheet" href="project-theme.css?v=unified-ui-1">
 </head>
 
 
-<body>
+<body class="project-detail media-converter-pro">
 
-<div class="noise"></div>
-
-
-<header>
-
-<nav class="nav container">
-
-<a class="logo" href="index.html">
-
-<span>Y</span> YADUNAND
-
-</a>
+<div class="noise" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
 
 
-<div class="links">
-
-<a href="index.html#home">
-Home
-</a>
-
-<a href="index.html#about">
-About
-</a>
-
-<a href="index.html#work">
-Work
-</a>
-
-<a href="index.html#ideas">
-Ideas
-</a>
-
-<a href="index.html#contact">
-Contact
-</a>
-
-</div>
-
-
-<div class="nav-actions">
-
-<button id="theme">
-◐
-</button>
-
-</div>
-
-</nav>
-
+<header class="site-header">
+  <nav class="nav container">
+    <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#games">Game Lab</a>
+      <a href="index.html#ideas">Ideas</a>
+      <a href="index.html#stack">Toolkit</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions"><span class="live-status"><i></i> AVAILABLE FOR IDEAS</span><button class="menu-toggle" id="menu" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button></div>
+  </nav>
 </header>
 
 
@@ -2250,45 +2221,17 @@ Media Converter Pro brings together FastAPI, yt-dlp, FFmpeg, WebSockets and a re
 </main>
 
 
-<footer class="container">
-
-<span>
-© 2026 YADUNAND
-</span>
-
-<a href="index.html#work">
-← BACK TO PORTFOLIO
-</a>
-
+<footer class="site-footer container">
+  <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+  <span>© 2026 YADUNAND — BUILT WITH CURIOSITY.</span>
+  <a href="index.html#home" class="back-top">BACK TO HOME ↑</a>
 </footer>
 
 
-<script>
 
-/* =========================================
-   THEME
-========================================= */
 
-const theme =
-document.getElementById("theme");
 
-if(theme){
-
-    theme.onclick = () => {
-
-        document.body.classList.toggle("light");
-
-        theme.textContent =
-            document.body.classList.contains("light")
-                ? "☀"
-                : "◐";
-
-    };
-
-}
-
-</script>
-
+<script src="script.js?v=unified-ui-1"></script>
 </body>
 
 </html>

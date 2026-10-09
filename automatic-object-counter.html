@@ -35,7 +35,7 @@ href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&fa
 rel="stylesheet"
 >
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=unified-ui-1">
 
 
 <style>
@@ -98,8 +98,8 @@ border-radius:18px;
 background:
 radial-gradient(
 circle at 50% 35%,
-#1b2815,
-#0b0d0e 65%
+#221735,
+#0b0b12 65%
 );
 display:grid;
 place-items:center;
@@ -114,7 +114,7 @@ inset:0;
 background:
 linear-gradient(
 transparent 49%,
-#b0ff4210 50%,
+#b48cff10 50%,
 transparent 51%
 );
 background-size:100% 22px
@@ -123,9 +123,9 @@ background-size:100% 22px
 .device{
 width:250px;
 height:250px;
-border:1px solid #b0ff4238;
+border:1px solid #b48cff38;
 border-radius:24px;
-background:#0e120d;
+background:#100d17;
 box-shadow:0 30px 80px #0008;
 display:flex;
 flex-direction:column;
@@ -137,8 +137,8 @@ position:relative
 .device-screen{
 width:180px;
 height:95px;
-border:5px solid #252b27;
-background:#071007;
+border:5px solid #282331;
+background:#080710;
 padding:12px;
 color:var(--green);
 font:9px monospace
@@ -154,7 +154,7 @@ margin:5px 0
 margin-top:22px;
 width:50px;
 height:20px;
-border:1px solid #5c6c56;
+border:1px solid #756b91;
 border-radius:5px
 }
 
@@ -174,7 +174,7 @@ border-radius:10px
 
 .spec small{
 display:block;
-color:#656c76;
+color:#7d8798;
 font-size:8px;
 letter-spacing:.14em
 }
@@ -297,7 +297,7 @@ border:1px solid var(--line);
 border-radius:7px;
 background:var(--card2);
 font:11px monospace;
-color:#aab0b8
+color:#b0b8c8
 }
 
 .logic strong{
@@ -316,9 +316,9 @@ border-radius:10px
 .oled-screen{
 width:260px;
 height:135px;
-border:8px solid #272d28;
+border:8px solid #282331;
 border-radius:7px;
-background:#061006;
+background:#080710;
 color:var(--green);
 padding:14px;
 font:10px monospace
@@ -341,7 +341,7 @@ right:15px;
 top:15px;
 background:var(--green);
 border:0;
-color:#0a0d08;
+color:#0b0912;
 padding:8px 11px;
 border-radius:6px;
 font-size:10px;
@@ -356,21 +356,21 @@ background:#080a0b;
 border:1px solid var(--line);
 border-radius:10px;
 padding:22px;
-color:#bbc1c9;
+color:#c7cce0;
 font:11px/1.7 Consolas,monospace;
 white-space:pre
 }
 
 .code .kw{
-color:#c58cff
+color:#b48cff
 }
 
 .code .str{
-color:#9edb6b
+color:#66e8ff
 }
 
 .code .num{
-color:#63e7ff
+color:#66e8ff
 }
 
 .gallery{
@@ -396,11 +396,11 @@ min-height:360px
 }
 
 .final-box{
-border:1px solid #b0ff4230;
+border:1px solid #b48cff30;
 background:
 linear-gradient(
 145deg,
-#151d10,
+#171021,
 var(--card)
 );
 border-radius:15px;
@@ -439,56 +439,31 @@ min-height:230px
 
 </style>
 
+
+<link rel="stylesheet" href="project-theme.css?v=unified-ui-1">
 </head>
 
 
-<body>
+<body class="project-detail automatic-object-counter">
 
-<div class="noise"></div>
+<div class="noise" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
 
 
-<header>
-
-<nav class="nav container">
-
-<a class="logo" href="index.html">
-<span>Y</span> YADUNAND
-</a>
-
-<div class="links">
-
-<a href="index.html#home">
-Home
-</a>
-
-<a href="index.html#about">
-About
-</a>
-
-<a href="index.html#work">
-Work
-</a>
-
-<a href="index.html#ideas">
-Ideas
-</a>
-
-<a href="index.html#contact">
-Contact
-</a>
-
-</div>
-
-<div class="nav-actions">
-
-<button id="theme">
-◐
-</button>
-
-</div>
-
-</nav>
-
+<header class="site-header">
+  <nav class="nav container">
+    <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#games">Game Lab</a>
+      <a href="index.html#ideas">Ideas</a>
+      <a href="index.html#stack">Toolkit</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions"><span class="live-status"><i></i> AVAILABLE FOR IDEAS</span><button class="menu-toggle" id="menu" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button></div>
+  </nav>
 </header>
 
 
@@ -1233,32 +1208,14 @@ This project demonstrates how a microcontroller, distance sensor, display and si
 </main>
 
 
-<footer class="container">
-
-<span>
-© 2026 YADUNAND
-</span>
-
-<a href="index.html#work">
-← BACK TO PORTFOLIO
-</a>
-
+<footer class="site-footer container">
+  <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+  <span>© 2026 YADUNAND — BUILT WITH CURIOSITY.</span>
+  <a href="index.html#home" class="back-top">BACK TO HOME ↑</a>
 </footer>
 
 
 <script>
-
-document.getElementById("theme").onclick=()=>{
-
-document.body.classList.toggle("light");
-
-document.getElementById("theme").textContent=
-document.body.classList.contains("light")
-?"☀"
-:"◐";
-
-};
-
 
 const code=
 document.getElementById("source").innerText;
@@ -1280,5 +1237,7 @@ setTimeout(
 
 </script>
 
+
+<script src="script.js?v=unified-ui-1"></script>
 </body>
 </html>

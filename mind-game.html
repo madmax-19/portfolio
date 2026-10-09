@@ -1,66 +1,2020 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Mind Game — Yadunand embedded systems project case study">
-<title>Mind Game — Yadunand</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mind Game — YADUNAND</title>
+
+    <link rel="stylesheet" href="style.css?v=unified-ui-1">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        :root{
+            --bg:#080a09;
+            --panel:#0d110e;
+            --panel2:#111611;
+            --green:#b48cff;
+            --text:#e8eee8;
+            --muted:#9ba59c;
+            --dim:#657067;
+            --line:#ffffff12;
+            --line2:#ffffff1c;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:var(--bg);
+            color:var(--text);
+            font-family:Arial,Helvetica,sans-serif;
+            overflow-x:hidden;
+        }
+
+        a{
+            color:inherit;
+            text-decoration:none;
+        }
+
+        ::selection{
+            background:var(--green);
+            color:#071006;
+        }
+
+        .container{
+            width:min(1100px,92%);
+            margin:auto;
+        }
+
+
+        /* =====================================================
+           BACKGROUND GRID
+        ===================================================== */
+
+        body:before{
+            content:"";
+
+            position:fixed;
+            inset:0;
+
+            pointer-events:none;
+
+            background-image:
+                linear-gradient(#ffffff04 1px,transparent 1px),
+                linear-gradient(90deg,#ffffff04 1px,transparent 1px);
+
+            background-size:40px 40px;
+
+            z-index:-1;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header{
+            height:72px;
+
+            position:sticky;
+            top:0;
+
+            z-index:100;
+
+            border-bottom:1px solid var(--line);
+
+            background:#080a09dd;
+
+            backdrop-filter:blur(16px);
+        }
+
+        .nav{
+            height:100%;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+
+        .brand{
+            font:700 13px monospace;
+            letter-spacing:.15em;
+        }
+
+        .brand span{
+            color:var(--green);
+        }
+
+        .back{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+
+            padding:9px 13px;
+
+            border:1px solid #b48cff30;
+            border-radius:6px;
+
+            color:#9ba59c;
+
+            font:10px monospace;
+
+            transition:.25s;
+        }
+
+        .back span{
+            color:var(--green);
+            font-size:13px;
+        }
+
+        .back:hover{
+            background:var(--green);
+            color:#071006;
+        }
+
+        .back:hover span{
+            color:#071006;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero{
+            min-height:620px;
+
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            align-items:center;
+
+            gap:70px;
+
+            padding:90px 0;
+
+            border-bottom:1px solid var(--line);
+        }
+
+        .hero-label{
+            color:var(--green);
+
+            font:10px monospace;
+            letter-spacing:.2em;
+
+            margin-bottom:20px;
+        }
+
+        .hero h1{
+            font-size:clamp(55px,7vw,92px);
+
+            line-height:.88;
+
+            letter-spacing:-.06em;
+
+            margin-bottom:30px;
+        }
+
+        .hero h1 em{
+            color:var(--green);
+
+            font-family:Georgia,serif;
+
+            font-weight:normal;
+        }
+
+        .hero-text{
+            max-width:520px;
+
+            color:var(--muted);
+
+            font-size:14px;
+
+            line-height:1.9;
+        }
+
+        .tags{
+            display:flex;
+            flex-wrap:wrap;
+
+            gap:8px;
+
+            margin-top:28px;
+        }
+
+        .tag{
+            padding:7px 10px;
+
+            border:1px solid var(--line2);
+
+            border-radius:5px;
+
+            color:#9ba59c;
+
+            font:9px monospace;
+        }
+
+        .tag.active{
+            color:var(--green);
+
+            border-color:#b48cff35;
+
+            background:#b48cff08;
+        }
+
+
+        /* =====================================================
+           DEVICE
+        ===================================================== */
+
+        .preview{
+            min-height:390px;
+
+            display:grid;
+            place-items:center;
+
+            position:relative;
+        }
+
+        .preview-glow{
+            position:absolute;
+
+            width:260px;
+            height:260px;
+
+            border-radius:50%;
+
+            background:#b48cff10;
+
+            filter:blur(35px);
+        }
+
+        .device{
+            width:310px;
+
+            padding:18px;
+
+            position:relative;
+            z-index:2;
+
+            border:2px solid #383044;
+
+            border-radius:16px;
+
+            background:
+                linear-gradient(145deg,#21172d,#080710);
+
+            box-shadow:
+                0 30px 70px #0009,
+                inset 0 0 30px #0008;
+        }
+
+        .device-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            margin-bottom:14px;
+
+            color:#657067;
+
+            font:8px monospace;
+            letter-spacing:.15em;
+        }
+
+        .status-led{
+            width:7px;
+            height:7px;
+
+            border-radius:50%;
+
+            background:var(--green);
+
+            box-shadow:
+                0 0 8px var(--green),
+                0 0 18px #b48cff66;
+        }
+
+        .oled{
+            height:145px;
+
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+
+            border:5px solid #282d29;
+
+            border-radius:7px;
+
+            background:#080710;
+
+            color:var(--green);
+
+            font-family:monospace;
+
+            box-shadow:
+                inset 0 0 30px #000,
+                0 0 25px #b48cff12;
+        }
+
+        .oled-title{
+            font-size:15px;
+            font-weight:bold;
+
+            letter-spacing:.12em;
+        }
+
+        .oled-level{
+            margin-top:6px;
+
+            color:#8c83a8;
+
+            font-size:8px;
+        }
+
+        .oled-leds{
+            display:flex;
+
+            gap:13px;
+
+            margin:15px 0;
+        }
+
+        .oled-leds i{
+            width:12px;
+            height:12px;
+
+            border-radius:50%;
+
+            background:#261a37;
+
+            border:1px solid #716789;
+        }
+
+        .oled-leds i:nth-child(2){
+            background:var(--green);
+
+            box-shadow:
+                0 0 10px var(--green),
+                0 0 20px #b48cff66;
+        }
+
+        .oled-score{
+            color:#8c83a8;
+
+            font-size:7px;
+        }
+
+        .buttons{
+            display:flex;
+            justify-content:center;
+
+            gap:14px;
+
+            margin-top:20px;
+        }
+
+        .buttons i{
+            width:23px;
+            height:23px;
+
+            border-radius:50%;
+
+            border:2px solid #494050;
+
+            background:#151915;
+
+            box-shadow:
+                inset 0 2px 3px #000,
+                0 3px 5px #000;
+        }
+
+        .buttons i:nth-child(2){
+            border-color:#8d7aac;
+        }
+
+        .device-name{
+            margin-top:16px;
+
+            text-align:center;
+
+            color:#8b82a0;
+
+            font:8px monospace;
+
+            letter-spacing:.2em;
+        }
+
+
+        /* =====================================================
+           CASE SECTIONS
+        ===================================================== */
+
+        .case-section{
+            padding:100px 0;
+
+            border-bottom:1px solid var(--line);
+        }
+
+        .case-heading{
+            margin-bottom:42px;
+        }
+
+        .case-heading small{
+            color:var(--green);
+
+            font:10px monospace;
+
+            letter-spacing:.18em;
+        }
+
+        .case-heading h2{
+            max-width:780px;
+
+            margin-top:13px;
+
+            font-size:clamp(36px,5vw,60px);
+
+            line-height:1;
+
+            letter-spacing:-.045em;
+        }
+
+        .case-heading h2 em{
+            color:var(--green);
+
+            font-family:Georgia,serif;
+
+            font-weight:normal;
+        }
+
+        .text{
+            max-width:760px;
+
+            color:var(--muted);
+
+            font-size:14px;
+
+            line-height:1.9;
+        }
+
+
+        /* =====================================================
+           INFO GRID
+        ===================================================== */
+
+        .info-grid{
+            display:grid;
+
+            grid-template-columns:repeat(4,1fr);
+
+            gap:1px;
+
+            background:var(--line);
+
+            border:1px solid var(--line);
+
+            border-radius:10px;
+
+            overflow:hidden;
+        }
+
+        .info-card{
+            padding:22px;
+
+            background:var(--panel);
+        }
+
+        .info-card small{
+            display:block;
+
+            margin-bottom:12px;
+
+            color:#657067;
+
+            font:8px monospace;
+
+            letter-spacing:.15em;
+        }
+
+        .info-card strong{
+            display:block;
+
+            font-size:15px;
+        }
+
+        .info-card span{
+            display:block;
+
+            margin-top:5px;
+
+            color:var(--green);
+
+            font:9px monospace;
+        }
+
+
+        /* =====================================================
+           TWO COLUMN
+        ===================================================== */
+
+        .two-column{
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:70px;
+        }
+
+        .info-block h3{
+            margin-bottom:17px;
+
+            font-size:21px;
+        }
+
+        .info-block p{
+            color:var(--muted);
+
+            font-size:13px;
+
+            line-height:1.9;
+        }
+
+        .features{
+            display:grid;
+
+            gap:11px;
+
+            margin-top:22px;
+        }
+
+        .feature{
+            color:#a2aca2;
+
+            font-size:12px;
+        }
+
+        .feature:before{
+            content:"✓";
+
+            color:var(--green);
+
+            margin-right:10px;
+
+            font-family:monospace;
+        }
+
+
+        /* =====================================================
+           HARDWARE
+        ===================================================== */
+
+        .hardware-grid{
+            display:grid;
+
+            grid-template-columns:repeat(3,1fr);
+
+            gap:14px;
+        }
+
+        .hardware-card{
+            padding:24px;
+
+            border:1px solid var(--line);
+
+            border-radius:9px;
+
+            background:
+                linear-gradient(145deg,#101510,#090c09);
+
+            transition:.25s;
+        }
+
+        .hardware-card:hover{
+            transform:translateY(-4px);
+
+            border-color:#b48cff35;
+        }
+
+        .hardware-number{
+            color:var(--green);
+
+            font:9px monospace;
+        }
+
+        .hardware-card h3{
+            margin:16px 0 7px;
+
+            font-size:16px;
+        }
+
+        .hardware-card p{
+            color:var(--muted);
+
+            font-size:11px;
+
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table-wrap{
+            overflow-x:auto;
+
+            border:1px solid var(--line);
+
+            border-radius:9px;
+        }
+
+        table{
+            width:100%;
+
+            min-width:650px;
+
+            border-collapse:collapse;
+        }
+
+        th{
+            padding:15px 18px;
+
+            background:#101410;
+
+            border-bottom:1px solid var(--line);
+
+            color:var(--green);
+
+            text-align:left;
+
+            font:9px monospace;
+
+            letter-spacing:.12em;
+        }
+
+        td{
+            padding:14px 18px;
+
+            border-bottom:1px solid var(--line);
+
+            background:#0c0a13;
+
+            color:#929d93;
+
+            font-size:11px;
+        }
+
+        td:first-child{
+            color:var(--text);
+
+            font-family:monospace;
+        }
+
+        tr:last-child td{
+            border-bottom:none;
+        }
+
+
+        /* =====================================================
+           FLOW
+        ===================================================== */
+
+        .flow{
+            display:grid;
+
+            grid-template-columns:repeat(5,1fr);
+
+            gap:10px;
+        }
+
+        .flow-card{
+            min-height:130px;
+
+            padding:19px;
+
+            position:relative;
+
+            border:1px solid var(--line);
+
+            border-radius:8px;
+
+            background:var(--panel);
+        }
+
+        .flow-card:not(:last-child):after{
+            content:"→";
+
+            position:absolute;
+
+            right:-15px;
+
+            top:50%;
+
+            transform:translateY(-50%);
+
+            color:var(--green);
+
+            z-index:3;
+        }
+
+        .flow-card span{
+            color:var(--green);
+
+            font:9px monospace;
+        }
+
+        .flow-card strong{
+            display:block;
+
+            margin-top:13px;
+
+            font-size:13px;
+        }
+
+        .flow-card p{
+            margin-top:6px;
+
+            color:var(--muted);
+
+            font-size:10px;
+        }
+
+
+        /* =====================================================
+           CODE WINDOW
+        ===================================================== */
+
+        .code-window{
+            border:1px solid var(--line);
+
+            border-radius:12px;
+
+            overflow:hidden;
+
+            background:#080a09;
+
+            box-shadow:0 25px 70px #0007;
+        }
+
+        .code-header{
+            height:48px;
+
+            display:flex;
+            align-items:center;
+
+            padding:0 15px;
+
+            background:#101310;
+
+            border-bottom:1px solid var(--line);
+        }
+
+        .code-dots{
+            display:flex;
+
+            gap:6px;
+
+            margin-right:15px;
+        }
+
+        .code-dots i{
+            width:8px;
+            height:8px;
+
+            border-radius:50%;
+
+            background:#383044;
+        }
+
+        .code-filename{
+            flex:1;
+
+            color:#687268;
+
+            font:10px monospace;
+        }
+
+        .copy-code{
+            border:1px solid #b48cff30;
+
+            background:#b48cff08;
+
+            color:var(--green);
+
+            padding:6px 11px;
+
+            border-radius:5px;
+
+            font:9px monospace;
+
+            cursor:pointer;
+
+            transition:.2s;
+        }
+
+        .copy-code:hover{
+            background:var(--green);
+
+            color:#0b0912;
+        }
+
+        .code-body{
+            margin:0;
+
+            padding:24px;
+
+            max-height:650px;
+
+            overflow:auto;
+
+            color:#9aa49a;
+
+            font:
+                11px/1.75
+                "JetBrains Mono",
+                "Cascadia Code",
+                Consolas,
+                monospace;
+
+            white-space:pre;
+
+            tab-size:2;
+
+            scrollbar-width:thin;
+
+            scrollbar-color:#332a40 transparent;
+        }
+
+        .code-body::-webkit-scrollbar{
+            width:7px;
+            height:7px;
+        }
+
+        .code-body::-webkit-scrollbar-track{
+            background:#090b0a;
+        }
+
+        .code-body::-webkit-scrollbar-thumb{
+            background:#332a40;
+
+            border-radius:10px;
+        }
+
+        .code-body::-webkit-scrollbar-thumb:hover{
+            background:#657067;
+        }
+
+        .code-note{
+            margin-top:14px;
+
+            padding:13px 16px;
+
+            border:1px solid var(--line);
+
+            border-radius:7px;
+
+            background:#0c0a13;
+
+            color:var(--muted);
+
+            font:10px/1.7 monospace;
+        }
+
+        .code-note strong{
+            color:var(--green);
+        }
+
+
+        /* =====================================================
+           FUTURE
+        ===================================================== */
+
+        .future-grid{
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:12px;
+        }
+
+        .future-card{
+            padding:20px;
+
+            border:1px solid var(--line);
+
+            border-radius:8px;
+
+            background:var(--panel);
+        }
+
+        .future-card span{
+            color:var(--green);
+
+            font:9px monospace;
+        }
+
+        .future-card h3{
+            margin:9px 0 5px;
+
+            font-size:14px;
+        }
+
+        .future-card p{
+            color:var(--muted);
+
+            font-size:11px;
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
+
+        .summary{
+            padding:90px 0;
+
+            text-align:center;
+        }
+
+        .summary h2{
+            font-size:clamp(38px,6vw,68px);
+
+            line-height:1;
+
+            letter-spacing:-.05em;
+        }
+
+        .summary h2 em{
+            color:var(--green);
+
+            font-family:Georgia,serif;
+
+            font-weight:normal;
+        }
+
+        .summary p{
+            max-width:650px;
+
+            margin:20px auto 0;
+
+            color:var(--muted);
+
+            font-size:13px;
+
+            line-height:1.8;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer{
+            min-height:90px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            border-top:1px solid var(--line);
+
+            color:#657067;
+
+            font:9px monospace;
+        }
+
+        footer a{
+            color:var(--green);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:900px){
+
+            .hero{
+                grid-template-columns:1fr;
+
+                gap:40px;
+            }
+
+            .info-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .hardware-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .two-column{
+                grid-template-columns:1fr;
+
+                gap:40px;
+            }
+
+            .flow{
+                grid-template-columns:1fr;
+            }
+
+            .flow-card{
+                min-height:auto;
+            }
+
+            .flow-card:not(:last-child):after{
+                content:"↓";
+
+                right:auto;
+                left:50%;
+
+                top:auto;
+                bottom:-18px;
+
+                transform:translateX(-50%);
+            }
+        }
+
+        @media(max-width:600px){
+
+            header{
+                height:62px;
+            }
+
+            .hero{
+                padding:70px 0;
+            }
+
+            .hero h1{
+                font-size:56px;
+            }
+
+            .device{
+                width:280px;
+            }
+
+            .case-section{
+                padding:75px 0;
+            }
+
+            .case-heading h2{
+                font-size:38px;
+            }
+
+            .info-grid{
+                grid-template-columns:1fr;
+            }
+
+            .hardware-grid{
+                grid-template-columns:1fr;
+            }
+
+            .future-grid{
+                grid-template-columns:1fr;
+            }
+
+            .code-body{
+                padding:18px;
+
+                font-size:9px;
+
+                max-height:500px;
+            }
+
+            footer{
+                flex-direction:column;
+
+                justify-content:center;
+
+                gap:8px;
+
+                padding:25px 0;
+            }
+        }
+
+    </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-.project-page{padding-top:125px;padding-bottom:100px}
-.back{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;margin-bottom:45px}
-.back:hover{color:var(--green)}
-.project-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding-bottom:90px;border-bottom:1px solid var(--line)}
-.project-kicker{color:var(--green);font-size:10px;letter-spacing:.2em;font-weight:700}
-.project-hero h1{font:700 clamp(48px,6.5vw,88px)/.96 "Space Grotesk";letter-spacing:-.06em;margin:18px 0}
-.project-hero h1 em{color:var(--green);font-style:normal}
-.project-hero p{max-width:650px;color:var(--muted);font-size:15px;line-height:1.8}
-.actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
-.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--card);color:var(--text);padding:10px 14px;border-radius:7px;font-size:11px;font-weight:600;text-decoration:none;transition:.25s}
-.button:hover,.main-btn{background:var(--green);color:#0b1007;border-color:var(--green)}
-.hero-device{height:390px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(circle at 50% 35%,#1b2815,#0b0d0e 65%);display:grid;place-items:center;position:relative;overflow:hidden}
-.hero-device:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 49%,#b0ff4210 50%,transparent 51%);background-size:100% 22px}
-.device{width:270px;padding:18px;border:1px solid #b0ff4238;border-radius:18px;background:#0e120d;box-shadow:0 30px 80px #0008;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
-.device-top{width:100%;display:flex;justify-content:space-between;color:#566056;font:8px monospace;letter-spacing:.15em;margin-bottom:12px}
-.status-led{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green),0 0 18px #b0ff4266}
-.device-screen{width:215px;height:125px;border:5px solid #272d29;border-radius:7px;background:#061006;box-shadow:inset 0 0 25px #000,0 0 25px #b0ff4212;padding:14px;color:var(--green);font:9px monospace;text-align:center}
-.device-screen b{display:block;font-size:25px;margin:8px 0}
-.device-leds{display:flex;justify-content:center;gap:12px;margin:10px 0}
-.device-leds i{width:12px;height:12px;border-radius:50%;background:#263125;border:1px solid #52604d}
-.device-leds i:nth-child(2){background:var(--green);box-shadow:0 0 10px var(--green),0 0 20px #b0ff4266}
-.device-buttons{display:flex;gap:12px;margin-top:18px}
-.device-buttons i{width:22px;height:22px;border-radius:50%;border:2px solid #424a42;background:#151915;box-shadow:inset 0 2px 3px #000,0 3px 5px #000}
-.device-name{margin-top:14px;color:#4e594f;font:8px monospace;letter-spacing:.2em}
-.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:35px 0 0}
-.spec{border:1px solid var(--line);background:var(--card);padding:18px;border-radius:10px}
-.spec small{display:block;color:#656c76;font-size:8px;letter-spacing:.14em}.spec b{display:block;margin-top:8px;font:600 15px "Space Grotesk"}
-.case-section{padding-top:105px}.case-heading{margin-bottom:35px}.case-heading small{color:var(--green);font-size:10px;letter-spacing:.18em}.case-heading h2{font:700 clamp(38px,5vw,62px)/1 "Space Grotesk";letter-spacing:-.05em;margin-top:13px}.case-heading h2 em{color:var(--green);font-style:normal}
-.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:25px}.panel h3{font:600 22px "Space Grotesk";margin-bottom:12px}.panel p,.panel li{color:var(--muted);font-size:13px;line-height:1.8}.panel ul{padding-left:18px}.panel li{margin:7px 0}
-.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.flow div{text-align:center;border:1px solid var(--line);padding:16px 7px;border-radius:8px;background:var(--card2);font-size:9px;color:var(--muted)}.flow b{display:block;color:var(--green);font-size:18px;margin-bottom:5px}
-.pin-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}.pin-table th,.pin-table td{text-align:left;padding:11px;border-bottom:1px solid var(--line)}.pin-table th{color:var(--green);font-size:9px;letter-spacing:.1em}.pin-table td{color:var(--muted)}
-.logic{display:grid;gap:9px;margin-top:18px}.logic div{padding:12px 15px;border:1px solid var(--line);border-radius:7px;background:var(--card2);font:11px monospace;color:#aab0b8}.logic strong{color:var(--green)}
-.oled-demo{display:grid;place-items:center;min-height:230px;background:#080a09;border:1px solid var(--line);border-radius:10px}.oled-screen{width:260px;height:135px;border:8px solid #272d28;border-radius:7px;background:#061006;color:var(--green);padding:14px;font:10px monospace}.oled-screen b{display:block;text-align:center;font-size:25px;margin:12px 0}.led-demo{display:flex;gap:14px;justify-content:center;margin:12px 0}.led-demo i{width:15px;height:15px;border-radius:50%;background:#263125;border:1px solid #52604d}.led-demo i.active{background:var(--green);box-shadow:0 0 10px var(--green)}
-.code-wrap{position:relative}.copy-btn{position:absolute;right:15px;top:15px;background:var(--green);border:0;color:#0a0d08;padding:8px 11px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;z-index:2}.code{max-height:620px;overflow:auto;background:#080a0b;border:1px solid var(--line);border-radius:10px;padding:22px;color:#bbc1c9;font:11px/1.7 Consolas,monospace;white-space:pre}
-.final-box{border:1px solid #b0ff4230;background:linear-gradient(145deg,#151d10,var(--card));border-radius:15px;padding:35px}.final-box h3{font:600 25px "Space Grotesk";margin-bottom:10px}.final-box p{max-width:800px;color:var(--muted);font-size:13px;line-height:1.8}
-@media(max-width:800px){.project-hero,.case-grid{grid-template-columns:1fr}.hero-device{height:320px}.specs{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}.flow div{min-height:auto}.actions{margin-bottom:10px}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="project-theme.css?v=unified-ui-1">
 </head>
-<body>
-<div class="noise"></div>
-<header><nav class="nav container"><a class="logo" href="index.html"><span>Y</span> YADUNAND</a><div class="links"><a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#work">Work</a><a href="index.html#ideas">Ideas</a><a href="index.html#contact">Contact</a></div><div class="nav-actions"><button id="theme">◐</button></div></nav></header>
-<main class="project-page container">
-<a class="back" href="index.html#work">← BACK TO WORK</a>
-<section class="project-hero"><div><div class="project-kicker">PROJECT 04 / EMBEDDED SYSTEMS</div><h1>MIND<br><em>GAME.</em></h1><p>An Arduino-based memory challenge that combines four LEDs, four push buttons, a speaker and a 128×64 SH1106 OLED display. The game generates a random sequence, shows it through light and sound, and increases the level after every successful round.</p><div class="actions"><a class="button main-btn" href="#code">View code ↓</a><a class="button" href="#hardware">Explore hardware</a></div></div><div class="hero-device"><div class="device"><div class="device-top"><span>MIND GAME // SYSTEM</span><i class="status-led"></i></div><div class="device-screen"><span>MIND GAME</span><b>LEVEL 04</b><div class="device-leds"><i></i><i></i><i></i><i></i></div><span>SCORE: 12</span></div><div class="device-buttons"><i></i><i></i><i></i><i></i></div><div class="device-name">ARDUINO MEMORY CHALLENGE</div></div></div></section>
-<div class="specs"><div class="spec"><small>CONTROLLER</small><b>Arduino UNO</b></div><div class="spec"><small>DISPLAY</small><b>SH1106 128×64</b></div><div class="spec"><small>INPUT</small><b>4 + START</b></div><div class="spec"><small>OUTPUT</small><b>4 LED + BUZZER</b></div></div>
-<section class="case-section"><div class="case-heading"><small>01 / OVERVIEW</small><h2>A memory game built<br>with simple hardware.</h2></div><div class="case-grid"><div class="panel"><h3>The idea</h3><p>The player presses START and watches a sequence of four possible LED and sound signals. The player then reproduces the same sequence using the four buttons. Every successful round adds one more signal to the sequence, making the game progressively harder.</p></div><div class="panel"><h3>Core features</h3><ul><li>Random sequence generation up to 100 levels.</li><li>Four LEDs provide visual feedback.</li><li>Four tones identify the four game inputs.</li><li>SH1106 OLED displays game status and score.</li><li>Wrong input ends the round and shows GAME OVER.</li></ul></div></div></section>
-<section class="case-section"><div class="case-heading"><small>02 / SYSTEM FLOW</small><h2>From random signal<br>to player input.</h2></div><div class="panel"><div class="flow"><div><b>01</b>START<div>Press start</div></div><div><b>02</b>GENERATE<div>Random sequence</div></div><div><b>03</b>SHOW<div>LED + sound</div></div><div><b>04</b>REPEAT<div>Player input</div></div><div><b>05</b>CHECK<div>Next level / game over</div></div></div></div></section>
-<section class="case-section" id="hardware"><div class="case-heading"><small>03 / HARDWARE</small><h2>The electronics<br>behind the game.</h2></div><div class="case-grid"><div class="panel"><h3>Components</h3><ul><li>Arduino UNO — main controller.</li><li>SH1106 128×64 SPI OLED — game interface.</li><li>4 push buttons — player input.</li><li>1 start button — begins a new game.</li><li>4 LEDs — visual sequence output.</li><li>Speaker / buzzer — audio sequence output.</li></ul></div><div class="panel"><h3>Pin configuration</h3><table class="pin-table"><tr><th>MODULE</th><th>PIN</th></tr><tr><td>BUTTON 1</td><td>D2</td></tr><tr><td>BUTTON 2</td><td>D3</td></tr><tr><td>BUTTON 3</td><td>D4</td></tr><tr><td>BUTTON 4</td><td>D5</td></tr><tr><td>START BUTTON</td><td>D6</td></tr><tr><td>OLED CS / DC / RESET</td><td>D10 / D9 / D8</td></tr><tr><td>LED 1–4</td><td>A0 / A1 / A2 / A3</td></tr><tr><td>BUZZER</td><td>D12</td></tr></table></div></div></section>
-<section class="case-section"><div class="case-heading"><small>04 / GAME LOGIC</small><h2>Each round adds<br>one more challenge.</h2></div><div class="case-grid"><div class="panel"><h3>Sequence generation</h3><p>At the beginning of a new game, the program fills the sequence array with random values from 0 to 3. The current level decides how many values are shown during the round.</p><div class="logic"><div><strong>LEVEL 1</strong> → 1 signal</div><div><strong>LEVEL 2</strong> → 2 signals</div><div><strong>LEVEL 3</strong> → 3 signals</div><div><strong>LEVEL 4</strong> → 4 signals</div></div></div><div class="panel"><h3>Player validation</h3><p>Each button maps to one sequence value. The player input is checked immediately. A correct sequence increases the score and level. A wrong button returns false and triggers the game-over screen.</p><div class="logic"><div><strong>CORRECT</strong> → score++ → level++</div><div><strong>WRONG</strong> → GAME OVER</div><div><strong>START</strong> → reset score + level</div></div></div></div></section>
-<section class="case-section"><div class="case-heading"><small>05 / OLED INTERFACE</small><h2>The display keeps<br>the player informed.</h2></div><div class="case-grid"><div class="panel"><h3>Startup screen</h3><div class="oled-demo"><div class="oled-screen">MIND GAME<hr><b>PRESS START</b><center>Memory Challenge</center></div></div></div><div class="panel"><h3>Game feedback</h3><div class="oled-demo"><div class="oled-screen">YOUR TURN<hr><b>LEVEL 04</b><center>Repeat sequence</center><div class="led-demo"><i></i><i class="active"></i><i></i><i></i></div></div></div></div></div></section>
-<section class="case-section" id="code"><div class="case-heading"><small>06 / COMPLETE ARDUINO CODE</small><h2>The actual <em>Mind Game code.</em></h2></div><div class="panel code-wrap"><button class="copy-btn" id="copyCode">Copy code</button><pre class="code" id="codeBlock"><code>#include &lt;U8g2lib.h&gt;
+
+
+<body class="project-detail mind-game">
+<div class="noise" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+  <nav class="nav container">
+    <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#games">Game Lab</a>
+      <a href="index.html#ideas">Ideas</a>
+      <a href="index.html#stack">Toolkit</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions"><span class="live-status"><i></i> AVAILABLE FOR IDEAS</span><button class="menu-toggle" id="menu" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button></div>
+  </nav>
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="container hero">
+
+    <div>
+
+        <div class="hero-label">
+            PROJECT 04 / EMBEDDED SYSTEMS
+        </div>
+
+        <h1>
+            MIND<br>
+            <em>GAME.</em>
+        </h1>
+
+        <p class="hero-text">
+
+            An Arduino-based memory challenge that combines
+            LEDs, physical buttons, sound feedback and an OLED
+            display to create an interactive sequence game.
+
+        </p>
+
+        <div class="tags">
+
+            <span class="tag active">
+                ARDUINO UNO
+            </span>
+
+            <span class="tag">
+                SH1106 OLED
+            </span>
+
+            <span class="tag">
+                EMBEDDED C++
+            </span>
+
+            <span class="tag">
+                LED + BUZZER
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="preview">
+
+        <div class="preview-glow"></div>
+
+        <div class="device">
+
+            <div class="device-top">
+
+                <span>
+                    MIND GAME / SYSTEM 01
+                </span>
+
+                <i class="status-led"></i>
+
+            </div>
+
+
+            <div class="oled">
+
+                <div class="oled-title">
+                    MIND GAME
+                </div>
+
+                <div class="oled-level">
+                    LEVEL 04
+                </div>
+
+                <div class="oled-leds">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <div class="oled-score">
+                    SCORE: 12
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+            </div>
+
+            <div class="device-name">
+                ARDUINO MEMORY CHALLENGE
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     01 / OVERVIEW
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                01 / PROJECT OVERVIEW
+            </small>
+
+            <h2>
+                A physical memory game
+                built with <em>Arduino.</em>
+            </h2>
+
+        </div>
+
+        <p class="text">
+
+            Mind Game is an Arduino-based memory challenge.
+            The system generates a random sequence and presents
+            it to the player using four LEDs and four different
+            sound tones.
+
+            <br><br>
+
+            The player must remember the sequence and reproduce
+            it using four physical buttons. When the sequence is
+            completed correctly, the score and level increase and
+            the next round becomes longer.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     02 / SYSTEM
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                02 / SYSTEM SPECIFICATIONS
+            </small>
+
+            <h2>
+                Compact hardware,
+                <em>interactive software.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-card">
+
+                <small>
+                    CONTROLLER
+                </small>
+
+                <strong>
+                    Arduino UNO
+                </strong>
+
+                <span>
+                    MAIN MCU
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <small>
+                    DISPLAY
+                </small>
+
+                <strong>
+                    SH1106 OLED
+                </strong>
+
+                <span>
+                    128 × 64
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <small>
+                    INPUT
+                </small>
+
+                <strong>
+                    5 BUTTONS
+                </strong>
+
+                <span>
+                    4 GAME + START
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <small>
+                    OUTPUT
+                </small>
+
+                <strong>
+                    4 LEDs + SPEAKER
+                </strong>
+
+                <span>
+                    VISUAL + AUDIO
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     03 / HOW IT WORKS
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                03 / HOW IT WORKS
+            </small>
+
+            <h2>
+                Watch it.
+                Remember it.
+                <em>Repeat it.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="two-column">
+
+            <div class="info-block">
+
+                <h3>
+                    Game concept
+                </h3>
+
+                <p>
+
+                    After the player presses START, the Arduino
+                    generates a random sequence.
+
+                    <br><br>
+
+                    Each value in the sequence corresponds to one
+                    of four LEDs and one of four different audio
+                    tones.
+
+                    <br><br>
+
+                    The player watches and listens to the sequence,
+                    then reproduces it by pressing the matching
+                    buttons.
+
+                </p>
+
+            </div>
+
+
+            <div class="info-block">
+
+                <h3>
+                    Main features
+                </h3>
+
+                <div class="features">
+
+                    <div class="feature">
+                        Random sequence generation
+                    </div>
+
+                    <div class="feature">
+                        Progressive difficulty
+                    </div>
+
+                    <div class="feature">
+                        Four LED indicators
+                    </div>
+
+                    <div class="feature">
+                        Four different tones
+                    </div>
+
+                    <div class="feature">
+                        OLED interface
+                    </div>
+
+                    <div class="feature">
+                        Score and level tracking
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     04 / HARDWARE
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                04 / HARDWARE
+            </small>
+
+            <h2>
+                The components behind
+                <em>the experience.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="hardware-grid">
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    01
+                </span>
+
+                <h3>
+                    Arduino UNO
+                </h3>
+
+                <p>
+                    Main controller responsible for game logic,
+                    inputs, outputs and display control.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    02
+                </span>
+
+                <h3>
+                    SH1106 OLED
+                </h3>
+
+                <p>
+                    128×64 OLED used for game messages,
+                    level information and score.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    03
+                </span>
+
+                <h3>
+                    Four Buttons
+                </h3>
+
+                <p>
+                    Physical controls used by the player to
+                    reproduce the generated sequence.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    04
+                </span>
+
+                <h3>
+                    Four LEDs
+                </h3>
+
+                <p>
+                    Each LED represents one of the four possible
+                    sequence values.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    05
+                </span>
+
+                <h3>
+                    Speaker / Buzzer
+                </h3>
+
+                <p>
+                    Produces different tones for each game input
+                    and provides feedback.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    06
+                </span>
+
+                <h3>
+                    Start Button
+                </h3>
+
+                <p>
+                    Starts a new game and resets the score and
+                    level.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     05 / PIN CONFIGURATION
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                05 / PIN CONFIGURATION
+            </small>
+
+            <h2>
+                Hardware mapped
+                <em>pin by pin.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>COMPONENT</th>
+                        <th>PIN</th>
+                        <th>ROLE</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>BUTTON 1</td>
+                        <td>D2</td>
+                        <td>Game input</td>
+                    </tr>
+
+                    <tr>
+                        <td>BUTTON 2</td>
+                        <td>D3</td>
+                        <td>Game input</td>
+                    </tr>
+
+                    <tr>
+                        <td>BUTTON 3</td>
+                        <td>D4</td>
+                        <td>Game input</td>
+                    </tr>
+
+                    <tr>
+                        <td>BUTTON 4</td>
+                        <td>D5</td>
+                        <td>Game input</td>
+                    </tr>
+
+                    <tr>
+                        <td>START BUTTON</td>
+                        <td>D6</td>
+                        <td>Start game</td>
+                    </tr>
+
+                    <tr>
+                        <td>OLED CS</td>
+                        <td>D10</td>
+                        <td>SPI chip select</td>
+                    </tr>
+
+                    <tr>
+                        <td>OLED DC</td>
+                        <td>D9</td>
+                        <td>Data / command</td>
+                    </tr>
+
+                    <tr>
+                        <td>OLED RESET</td>
+                        <td>D8</td>
+                        <td>Display reset</td>
+                    </tr>
+
+                    <tr>
+                        <td>LED 1</td>
+                        <td>A0</td>
+                        <td>Signal 1</td>
+                    </tr>
+
+                    <tr>
+                        <td>LED 2</td>
+                        <td>A1</td>
+                        <td>Signal 2</td>
+                    </tr>
+
+                    <tr>
+                        <td>LED 3</td>
+                        <td>A2</td>
+                        <td>Signal 3</td>
+                    </tr>
+
+                    <tr>
+                        <td>LED 4</td>
+                        <td>A3</td>
+                        <td>Signal 4</td>
+                    </tr>
+
+                    <tr>
+                        <td>SPEAKER</td>
+                        <td>D12</td>
+                        <td>Audio output</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     06 / GAME FLOW
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                06 / GAME FLOW
+            </small>
+
+            <h2>
+                One loop.
+                <em>Increasing difficulty.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="flow">
+
+            <div class="flow-card">
+
+                <span>01</span>
+
+                <strong>
+                    START
+                </strong>
+
+                <p>
+                    Player presses START.
+                </p>
+
+            </div>
+
+
+            <div class="flow-card">
+
+                <span>02</span>
+
+                <strong>
+                    GENERATE
+                </strong>
+
+                <p>
+                    Random sequence is created.
+                </p>
+
+            </div>
+
+
+            <div class="flow-card">
+
+                <span>03</span>
+
+                <strong>
+                    SHOW
+                </strong>
+
+                <p>
+                    LEDs and speaker play it.
+                </p>
+
+            </div>
+
+
+            <div class="flow-card">
+
+                <span>04</span>
+
+                <strong>
+                    REPEAT
+                </strong>
+
+                <p>
+                    Player enters the pattern.
+                </p>
+
+            </div>
+
+
+            <div class="flow-card">
+
+                <span>05</span>
+
+                <strong>
+                    CHECK
+                </strong>
+
+                <p>
+                    Correct = next level.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     07 / GAME LOGIC
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                07 / GAME LOGIC
+            </small>
+
+            <h2>
+                Every correct answer makes
+                the <em>next round harder.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="two-column">
+
+            <div class="info-block">
+
+                <h3>
+                    Progressive sequence
+                </h3>
+
+                <p>
+
+                    The game starts at level 1.
+
+                    <br><br>
+
+                    After successfully reproducing the complete
+                    sequence, the score increases and the level
+                    is incremented.
+
+                    <br><br>
+
+                    The next round therefore contains one additional
+                    sequence value.
+
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+                        Level 1 → 1 signal
+                    </div>
+
+                    <div class="feature">
+                        Level 2 → 2 signals
+                    </div>
+
+                    <div class="feature">
+                        Level 3 → 3 signals
+                    </div>
+
+                    <div class="feature">
+                        Level 4 → 4 signals
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-block">
+
+                <h3>
+                    Game over
+                </h3>
+
+                <p>
+
+                    During the player's turn, every button press
+                    is compared with the expected sequence value.
+
+                    <br><br>
+
+                    If the player presses the wrong button,
+                    `playerTurn()` returns false.
+
+                    <br><br>
+
+                    The game then calls `gameOver()`, plays the
+                    game-over tone and displays the score and
+                    current level on the OLED.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     08 / COMPLETE ARDUINO CODE
+===================================================== -->
+
+<section class="case-section" id="code">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                08 / COMPLETE ARDUINO CODE
+            </small>
+
+            <h2>
+                The actual
+                <em>Mind Game code.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-dots">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <span class="code-filename">
+                    mind_game.ino
+                </span>
+
+                <button
+                    class="copy-code"
+                    onclick="copyMindGameCode()">
+                    COPY
+                </button>
+
+            </div>
+
+
+            <pre class="code-body"><code id="mindGameCode">#include &lt;U8g2lib.h&gt;
 
 // ================= OLED =================
 
@@ -104,6 +2058,7 @@ int tones[4] = {
   523
 };
 
+
 // =================================================
 // OLED MESSAGE
 // =================================================
@@ -127,6 +2082,7 @@ void showMessage(String line1, String line2 = "", String line3 = "") {
   u8g2.sendBuffer();
 }
 
+
 // =================================================
 // LED + SOUND
 // =================================================
@@ -145,6 +2101,7 @@ void playSignal(int index) {
 
   delay(150);
 }
+
 
 // =================================================
 // SHOW RANDOM SEQUENCE
@@ -167,6 +2124,7 @@ void showSequence() {
     delay(100);
   }
 }
+
 
 // =================================================
 // WAIT FOR PLAYER BUTTON
@@ -194,6 +2152,7 @@ int waitForButton() {
     delay(5);
   }
 }
+
 
 // =================================================
 // PLAYER TURN
@@ -223,6 +2182,7 @@ bool playerTurn() {
   return true;
 }
 
+
 // =================================================
 // CORRECT ANSWER
 // =================================================
@@ -245,6 +2205,7 @@ void successScreen() {
 
   delay(800);
 }
+
 
 // =================================================
 // GAME OVER
@@ -272,6 +2233,7 @@ void gameOver() {
   );
 }
 
+
 // =================================================
 // WAIT FOR START
 // =================================================
@@ -294,6 +2256,7 @@ void waitForStart() {
 
   delay(300);
 }
+
 
 // =================================================
 // START NEW GAME
@@ -329,6 +2292,7 @@ void newGame() {
 
   delay(800);
 }
+
 
 // =================================================
 // SETUP
@@ -368,6 +2332,7 @@ void setup() {
   delay(1500);
 }
 
+
 // =================================================
 // MAIN LOOP
 // =================================================
@@ -404,12 +2369,372 @@ void loop() {
       break;
     }
   }
-}</code></pre></div></section>
-<section class="case-section"><div class="case-heading"><small>07 / LEARNING OUTCOMES</small><h2>What this project<br>helped me practice.</h2></div><div class="case-grid"><div class="panel"><h3>Embedded programming</h3><p>Working with digital inputs and outputs, INPUT_PULLUP buttons, OLED graphics, tone generation, delays and random number generation on Arduino.</p></div><div class="panel"><h3>Problem solving</h3><p>The project combines multiple hardware interfaces into one state-driven game loop and requires careful sequence checking, feedback and user interaction.</p></div></div></section>
-<section class="case-section"><div class="case-heading"><small>08 / FUTURE IMPROVEMENTS</small><h2>Where the game<br>could go next.</h2></div><div class="case-grid"><div class="panel"><h3>More game modes</h3><p>Add timed mode, difficulty selection, lives, high-score storage and different sequence speeds.</p></div><div class="panel"><h3>Better feedback</h3><p>Add animations, score history, sound effects and richer OLED graphics for a more polished game experience.</p></div></div></section>
-<section class="case-section"><div class="final-box"><h3>Mind Game — Arduino Memory Challenge</h3><p>This project demonstrates how a small microcontroller can combine sensors or inputs, visual feedback, audio feedback and a display into a complete interactive embedded system.</p></div></section>
-</main>
-<footer class="container"><span>© 2026 YADUNAND</span><a href="index.html#work">BACK TO WORK ↑</a></footer>
-<script src="script.js"></script>
+}</code></pre>
+
+        </div>
+
+
+        <div class="code-note">
+
+            <strong>NOTE:</strong>
+            This is the complete Arduino source used for the
+            Mind Game project. Use the COPY button to copy the
+            source code.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     09 / SOFTWARE
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                09 / SOFTWARE
+            </small>
+
+            <h2>
+                Arduino C++ with
+                <em>U8g2.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="two-column">
+
+            <div class="info-block">
+
+                <h3>
+                    Arduino IDE
+                </h3>
+
+                <p>
+                    The project is programmed using Arduino C++.
+                    The software separates the game into functions
+                    for the display, sequence playback, button
+                    input, success state, game-over state and
+                    game initialization.
+                </p>
+
+            </div>
+
+
+            <div class="info-block">
+
+                <h3>
+                    U8g2 Library
+                </h3>
+
+                <p>
+                    The U8g2 library is used to control the
+                    SH1106 128×64 OLED through the hardware SPI
+                    interface.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     10 / LEARNING OUTCOMES
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                10 / LEARNING OUTCOMES
+            </small>
+
+            <h2>
+                What I learned by
+                <em>building it.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="hardware-grid">
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    01
+                </span>
+
+                <h3>
+                    Embedded Programming
+                </h3>
+
+                <p>
+                    Working with Arduino C++, functions,
+                    loops, variables and conditional logic.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    02
+                </span>
+
+                <h3>
+                    Hardware Interfacing
+                </h3>
+
+                <p>
+                    Connecting buttons, LEDs, speaker and
+                    OLED display to a microcontroller.
+                </p>
+
+            </div>
+
+
+            <div class="hardware-card">
+
+                <span class="hardware-number">
+                    03
+                </span>
+
+                <h3>
+                    Game Logic
+                </h3>
+
+                <p>
+                    Designing a sequence-based system with
+                    scoring and progressive difficulty.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     11 / FUTURE
+===================================================== -->
+
+<section class="case-section">
+
+    <div class="container">
+
+        <div class="case-heading">
+
+            <small>
+                11 / FUTURE IMPROVEMENTS
+            </small>
+
+            <h2>
+                Ideas for the
+                <em>next version.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="future-grid">
+
+            <div class="future-card">
+
+                <span>
+                    01
+                </span>
+
+                <h3>
+                    High Score Storage
+                </h3>
+
+                <p>
+                    Store the highest score using EEPROM.
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <span>
+                    02
+                </span>
+
+                <h3>
+                    Multiple Game Modes
+                </h3>
+
+                <p>
+                    Add different difficulty levels and
+                    gameplay modes.
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <span>
+                    03
+                </span>
+
+                <h3>
+                    Improved OLED Interface
+                </h3>
+
+                <p>
+                    Add animations, graphics and richer
+                    game feedback.
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <span>
+                    04
+                </span>
+
+                <h3>
+                    Wireless Multiplayer
+                </h3>
+
+                <p>
+                    Connect multiple game units for
+                    multiplayer interaction.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<section class="summary">
+
+    <div class="container">
+
+        <h2>
+            BUILD.
+            <em>REMEMBER.</em>
+            REPEAT.
+        </h2>
+
+        <p>
+
+            Mind Game combines embedded programming,
+            hardware interfacing, OLED graphics, audio feedback
+            and interactive game logic into one compact Arduino
+            project.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="site-footer container">
+  <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+  <span>© 2026 YADUNAND — BUILT WITH CURIOSITY.</span>
+  <a href="index.html#home" class="back-top">BACK TO HOME ↑</a>
+</footer>
+
+
+
+<!-- =====================================================
+     COPY CODE
+===================================================== -->
+
+<script>
+
+function copyMindGameCode(){
+
+    const code =
+        document.getElementById("mindGameCode").innerText;
+
+    const button =
+        document.querySelector(".copy-code");
+
+    navigator.clipboard.writeText(code).then(() => {
+
+        const original = button.innerText;
+
+        button.innerText = "COPIED ✓";
+
+        setTimeout(() => {
+            button.innerText = original;
+        }, 1800);
+
+    }).catch(() => {
+
+        const textarea =
+            document.createElement("textarea");
+
+        textarea.value = code;
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        textarea.remove();
+
+        const original = button.innerText;
+
+        button.innerText = "COPIED ✓";
+
+        setTimeout(() => {
+            button.innerText = original;
+        }, 1800);
+
+    });
+
+}
+
+</script>
+
+
+
+<script src="script.js?v=unified-ui-1"></script>
 </body>
 </html>
