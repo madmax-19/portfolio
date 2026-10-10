@@ -3,23 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Yadunand — Developer, Maker & Problem Solver. A portfolio of software, electronics, and experimental projects.">
+  <meta name="description" content="MAD MAX — Developer, Maker & Problem Solver. A portfolio of software, electronics, and experimental projects.">
   <meta name="theme-color" content="#080a09">
-  <title>YADUNAND — Digital Space</title>
+  <title>MAD MAX — Digital Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=unified-ui-1">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta name="theme-color" content="#080a09">
+
+  <style id="mad-maxx-logo-integration">
+    .logo-mark-img { width:34px; height:34px; display:block; flex:0 0 34px; object-fit:cover; object-position:center; border:1px solid rgba(230,226,216,.35); border-radius:7px; background:#080a09; box-shadow:0 3px 14px rgba(0,0,0,.3); }
+    .logo { gap:10px; }
+    @media (max-width:520px) { .logo-mark-img { width:30px; height:30px; flex-basis:30px; } }
+  </style>
+
 </head>
 <body>
-  <div class="page-loader" aria-hidden="true"><div class="loader-mark">Y<span>.</span></div><div class="loader-line"><i></i></div><small>INITIALIZING DIGITAL SPACE</small></div>
+  <iframe class="water-background" src="water-background.html" title="" aria-hidden="true" tabindex="-1"></iframe>
+
+  <div class="page-loader" id="pageLoader" role="status" aria-label="Loading MAD MAX portfolio">
+    <div class="loader-art" aria-hidden="true">
+      <span class="loader-disc"></span><span class="loader-cut"></span><span class="loader-orbit"></span>
+      <span class="loader-liquid"></span>
+    </div>
+    <div class="loader-wordmark">MAD <span>MAX</span></div>
+    <p class="loader-tagline">BUILDING IDEAS INTO REAL THINGS</p>
+    <div class="loader-line" aria-hidden="true"><i></i></div>
+    <div class="loader-meta"><small>PORTFOLIO / 2026</small><small class="loader-percent">00%</small></div>
+    <small class="loader-credit">DESIGNED &amp; BUILT BY MAD MAX</small>
+  </div>
   <div class="noise" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
   <div class="scroll-progress" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <nav class="nav container">
-      <a class="logo magnetic" href="#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+      <a class="logo magnetic" href="#home" aria-label="MADMAX home"><img class="logo-mark-img" src="assets/mad-maxx-mark.jpg" alt="MADMAX logo"><span>MAD MAX</span><small>®</small></a>
       <div class="links" id="navLinks">
         <a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#games">Game Lab</a><a href="#ideas">Ideas</a><a href="#stack">Toolkit</a><a href="#contact">Contact</a>
       </div>
@@ -30,29 +51,26 @@
   <main>
     <section id="home" class="hero container">
       <div class="hero-copy">
-        <div class="eyebrow reveal"><span class="eyebrow-line"></span> CREATIVE TECHNOLOGY <span class="eyebrow-year">/ Y—026</span></div>
+        <div class="eyebrow reveal"><span class="eyebrow-line"></span> CREATIVE TECHNOLOGY <span class="eyebrow-year">/ MM—026</span></div>
         <h1 class="hero-title reveal"><span>IDEAS</span><span class="accent-text">IN MOTION<span class="period">.</span></span></h1>
         <p class="hero-intro reveal">I’m <strong>Yadunand</strong> — a developer and maker turning code, electronics, and curious ideas into real experiences.</p>
         <div class="hero-actions reveal"><a class="button button-primary magnetic" href="#work">Explore projects <span>↗</span></a><a class="button button-ghost magnetic" href="#contact">Start a conversation <span>↗</span></a></div>
         <div class="hero-foot reveal"><span class="pulse-dot"></span><span>THINKING • BUILDING • ITERATING</span><span class="hero-foot-line"></span></div>
       </div>
-      <div class="hero-visual reveal" aria-label="Interactive 3D Yadunand visual">
-        <div class="visual-topline"><span>FIG. 001 — KINETIC GLASS</span><span>KINETIC FORM / INTERACTIVE 3D</span></div>
-        <div class="orb-stage four-d-stage" id="orbStage">
-          <div class="dimension-grid" aria-hidden="true"></div>
-          <div class="dimension-ribbon ribbon-a" aria-hidden="true"></div>
-          <div class="dimension-ribbon ribbon-b" aria-hidden="true"></div>
-          <div class="dimension-ribbon ribbon-c" aria-hidden="true"></div>
-          <div class="orb-fallback kinetic-fallback" aria-hidden="true"><div class="kinetic-glass"><span>Y</span></div><i class="glass-shard shard-one"></i><i class="glass-shard shard-two"></i><i class="glass-shard shard-three"></i></div>
-          <canvas id="heroCanvas" aria-label="Interactive floating glass prism with kinetic light panels"></canvas>
-          <div class="orb-crosshair crosshair-one"></div><div class="orb-crosshair crosshair-two"></div>
-          <div class="orbit-label label-status"><small>STATUS</small><b><i></i> BUILDING</b></div>
-          <div class="orbit-label label-mode"><small>MODE</small><b>CURIOUS <span>↗</span></b></div>
-          <div class="orbit-label label-coordinate"><small>COORDINATES</small><b>Y / 026</b></div>
+      <div class="hero-visual reveal" aria-label="Abstract interactive liquid glass artwork">
+        <div class="visual-topline"><span>FIG. 001 — LIQUID FORM</span><span>CREATIVE TECHNOLOGY / 3D</span></div>
+        <div class="liquid-stage" id="liquidStage">
+          <div class="liquid-grid" aria-hidden="true"></div>
+          <div class="liquid-halo halo-one" aria-hidden="true"></div>
+          <div class="liquid-halo halo-two" aria-hidden="true"></div>
+          <div class="liquid-sculpture" aria-hidden="true"><i class="liquid-ribbon ribbon-one"></i><i class="liquid-ribbon ribbon-two"></i><i class="liquid-ribbon ribbon-three"></i><i class="liquid-glint glint-one"></i><i class="liquid-glint glint-two"></i></div>
+          <div class="liquid-caption caption-left"><small>FORM</small><b>IN MOTION</b></div>
+          <div class="liquid-caption caption-right"><small>STATUS</small><b><i></i> CREATING</b></div>
+          <span class="liquid-node node-one" aria-hidden="true"></span><span class="liquid-node node-two" aria-hidden="true"></span>
         </div>
         <div class="visual-bottomline"><span>SOFTWARE × HARDWARE × IDEAS</span><a class="scroll-hint" href="#about">SCROLL TO EXPLORE ↓</a></div>
       </div>
-      <div class="hero-index" aria-hidden="true">Y—001</div>
+      <div class="hero-index" aria-hidden="true">MM—001</div>
     </section>
 
     <div class="entry-rail container reveal" aria-label="Continue exploring the portfolio">
@@ -72,12 +90,12 @@
         </div>
         <div class="profile-card reveal tilt-card">
           <div class="profile-card-top"><span>PROFILE / 001</span><span class="card-status"><i></i> ONLINE</span></div>
-          <div class="profile-avatar"><span>Y</span><i class="avatar-orbit"></i></div>
-          <div class="profile-name">YADUNAND<span>.</span></div>
+          <div class="profile-avatar"><span>YD</span><i class="avatar-orbit"></i></div>
+          <div class="profile-name">Yadunand<span>.</span></div>
           <div class="profile-role">DEVELOPMENT • ELECTRONICS • IDEAS</div>
           <div class="profile-divider"></div>
-          <div class="profile-card-bottom"><p>Curiosity into systems.<br>Experiments into reality.</p><span class="profile-sig">Y—026</span></div>
-          <div class="card-watermark">Y</div>
+          <div class="profile-card-bottom"><p>Curiosity into systems.<br>Experiments into reality.</p><span class="profile-sig">MM—026</span></div>
+          <div class="card-watermark">YD</div>
         </div>
       </div>
     </section>
@@ -111,7 +129,7 @@
         <div class="section-heading reveal"><div><span class="section-index">03 / GAME LAB</span><h2>Take a break.<br><em>Play something.</em></h2></div><p class="heading-note">Small interactive projects built around logic, memory, and experimentation.</p></div>
         <div class="game-feature reveal">
           <div class="game-art"><div class="game-art-grid"></div><div class="game-console"><div class="console-top"><span>Y / MIND SYSTEM</span><i></i></div><div class="console-screen"><small>MEMORY CHALLENGE</small><strong>REPEAT<span>.</span></strong><div class="console-leds"><i></i><i></i><i></i><i></i></div><span class="console-level">LEVEL 04 // READY</span></div><div class="console-pad"><i></i><i></i><i></i><i></i></div></div><div class="game-art-stamp">PLAY / 001</div></div>
-          <div class="game-copy"><span class="section-index">ARDUINO • MEMORY • WEB GAME</span><h3>Remember<br>the pattern.</h3><p>Watch the sequence. Remember it. Repeat it. Play the browser version of the Arduino-inspired memory game and challenge your best score on the global leaderboard.</p><div class="game-actions"><a class="button button-primary magnetic" href="https://madmax-19.github.io/mind-game/" target="_blank" rel="noopener noreferrer">Play Mind Game <span>↗</span></a><a class="text-link" href="mind-game.html">Explore the build <span>→</span></a></div><div class="game-stats"><div><b>04</b><span>INPUT PADS</span></div><div><b>∞</b><span>REPLAY VALUE</span></div><div><b>01</b><span>GLOBAL BOARD</span></div></div></div>
+          <div class="game-copy"><span class="section-index">ARDUINO • MEMORY • WEB GAME</span><h3>Remember<br>the pattern.</h3><p>Watch the sequence. Remember it. Repeat it. Play the browser version of the Arduino-inspired memory game and challenge your best score on the global leaderboard.</p><div class="game-actions"><a class="button button-primary magnetic" href="https://MADMAX-19.github.io/mind-game/" target="_blank" rel="noopener noreferrer">Play Mind Game <span>↗</span></a><a class="text-link" href="mind-game.html">Explore the build <span>→</span></a></div><div class="game-stats"><div><b>04</b><span>INPUT PADS</span></div><div><b>∞</b><span>REPLAY VALUE</span></div><div><b>01</b><span>GLOBAL BOARD</span></div></div></div>
         </div>
       </div>
     </section>
@@ -128,15 +146,44 @@
     <section id="stack" class="section stack-section"><div class="container"><div class="section-heading reveal"><div><span class="section-index">05 / TOOLKIT</span><h2>Tools I use<br><em>to build.</em></h2></div><p class="heading-note">A growing toolkit for turning ideas into working projects.</p></div><div class="stack-grid reveal"><div><span>01</span><b>PYTHON</b><small>LOGIC / BACKEND</small></div><div><span>02</span><b>JAVASCRIPT</b><small>INTERACTION / WEB</small></div><div><span>03</span><b>HTML / CSS</b><small>INTERFACE / DESIGN</small></div><div><span>04</span><b>ARDUINO</b><small>EMBEDDED SYSTEMS</small></div><div><span>05</span><b>FASTAPI</b><small>API / SERVICES</small></div><div><span>06</span><b>GIT / GITHUB</b><small>VERSION CONTROL</small></div></div></div></section>
 
     <section id="contact" class="section container contact-section">
-      <div class="contact-panel reveal"><div class="contact-orb" aria-hidden="true"></div><div class="contact-content"><span class="section-index">06 / LET'S CONNECT</span><h2>Got an idea?<br><em>Let's make it real.</em></h2><p>Have a project, collaboration, or interesting idea? Let's turn it into something tangible.</p><a class="button button-primary magnetic" href="mailto:yadunandjidesh19@gmail.com">Start a conversation <span>↗</span></a></div><div class="contact-side"><span>OPEN CHANNEL</span><b>YADUNAND<span>.</span></b><small>SOFTWARE × HARDWARE × IDEAS</small><div class="contact-socials"><a href="https://github.com/madmax-19" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#" aria-label="LinkedIn profile link to be added">LinkedIn ↗</a><a href="#" aria-label="Instagram profile link to be added">Instagram ↗</a></div></div></div>
+      <div class="contact-panel reveal"><div class="contact-orb" aria-hidden="true"></div><div class="contact-content"><span class="section-index">06 / LET'S CONNECT</span><h2>Got an idea?<br><em>Let's make it real.</em></h2><p>Have a project, collaboration, or interesting idea? Let's turn it into something tangible.</p><a class="button button-primary magnetic" href="mailto:MADMAXjidesh19@gmail.com">Start a conversation <span>↗</span></a></div><div class="contact-side"><span>OPEN CHANNEL</span><b>MADMAX<span>.</span></b><small>SOFTWARE × HARDWARE × IDEAS</small><div class="contact-socials"><a href="https://github.com/MADMAX-19" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#" aria-label="LinkedIn profile link to be added">LinkedIn ↗</a><a href="#" aria-label="Instagram profile link to be added">Instagram ↗</a></div></div></div>
     </section>
   </main>
 
-  <footer class="site-footer container"><a class="logo" href="#home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a><span>© 2026 YADUNAND — DESIGNED WITH CURIOSITY.</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
+  <footer class="site-footer container"><a class="logo" href="#home"><img class="logo-mark-img" src="assets/mad-maxx-mark.jpg" alt="MADMAX logo"><span>MAD MAX</span><small>®</small></a><span>© 2026 MAD MAX — DESIGNED &amp; BUILT BY MAD MAX.</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
 
   <div class="modal" id="modal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button id="close" class="modal-close" aria-label="Close details">×</button><span class="section-index">PROJECT DETAILS</span><h2 id="modalTitle"></h2><p id="modalDesc"></p><div id="modalTech" class="modal-tech"></div></div></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
   <script src="script.js?v=unified-ui-1"></script>
+<script id="water-pointer-relay">
+(() => {
+  const frame = document.querySelector('iframe.water-background');
+  if (!frame) return;
+  let lastX = null, lastY = null, lastT = 0, down = false;
+  const send = (e, isDown = down) => {
+    const w = window.innerWidth || 1, h = window.innerHeight || 1;
+    const now = performance.now();
+    const x = e.clientX / w, y = e.clientY / h;
+    const dt = Math.max(8, now - (lastT || now));
+    const vx = lastX == null ? 0 : (x - lastX) / dt * 16.7;
+    const vy = lastY == null ? 0 : (y - lastY) / dt * 16.7;
+    frame.contentWindow?.postMessage({
+      type: 'water-pointer', x, y, vx, vy,
+      moving: lastX != null && Math.hypot(x - lastX, y - lastY) > 0.0008,
+      active: true, down: isDown
+    }, '*');
+    lastX = x; lastY = y; lastT = now;
+  };
+  window.addEventListener('pointermove', e => send(e), { passive: true });
+  window.addEventListener('pointerdown', e => { down = true; send(e, true); }, { passive: true });
+  window.addEventListener('pointerup', e => { down = false; send(e, false); }, { passive: true });
+  window.addEventListener('pointerleave', () => {
+    frame.contentWindow?.postMessage({ type: 'water-pointer', x: lastX ?? .5, y: lastY ?? .5, active: false, moving: false }, '*');
+    lastX = lastY = null; lastT = 0;
+  });
+})();
+</script>
+
 </body>
 </html>

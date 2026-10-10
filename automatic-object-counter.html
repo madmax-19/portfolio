@@ -12,11 +12,11 @@ content="width=device-width,initial-scale=1.0"
 
 <meta
 name="description"
-content="Automatic Object Counting System — Yadunand project case study"
+content="Automatic Object Counting System — MADMAX project case study"
 >
 
 <title>
-Automatic Object Counter — Yadunand
+Automatic Object Counter — MADMAX
 </title>
 
 <link
@@ -441,10 +441,25 @@ min-height:230px
 
 
 <link rel="stylesheet" href="project-theme.css?v=unified-ui-1">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta name="theme-color" content="#080a09">
+
+  <style id="mad-maxx-logo-integration">
+    .logo-mark-img { width:34px; height:34px; display:block; flex:0 0 34px; object-fit:cover; object-position:center; border:1px solid rgba(230,226,216,.35); border-radius:7px; background:#080a09; box-shadow:0 3px 14px rgba(0,0,0,.3); }
+    .logo { gap:10px; }
+    @media (max-width:520px) { .logo-mark-img { width:30px; height:30px; flex-basis:30px; } }
+  </style>
+
+<style>
+          body.project-detail { isolation: isolate; }
+          body.project-detail > .water-background { z-index: -1; }
+        </style>
 </head>
 
 
 <body class="project-detail automatic-object-counter">
+  <iframe class="water-background" src="water-background.html" title="" aria-hidden="true" tabindex="-1"></iframe>
+
 
 <div class="noise" aria-hidden="true"></div>
 <div class="scroll-progress" aria-hidden="true"><i></i></div>
@@ -452,7 +467,7 @@ min-height:230px
 
 <header class="site-header">
   <nav class="nav container">
-    <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
+    <a class="logo" href="index.html#home" aria-label="MADMAX home"><img class="logo-mark-img" src="assets/mad-maxx-mark.jpg" alt="MADMAX logo"><span>MADMAX</span><small>®</small></a>
     <div class="links" id="navLinks">
       <a href="index.html#home">Home</a>
       <a href="index.html#about">About</a>
@@ -1209,8 +1224,8 @@ This project demonstrates how a microcontroller, distance sensor, display and si
 
 
 <footer class="site-footer container">
-  <a class="logo" href="index.html#home" aria-label="Yadunand home"><span class="logo-mark">Y</span><span>YADUNAND</span><small>®</small></a>
-  <span>© 2026 YADUNAND — BUILT WITH CURIOSITY.</span>
+  <a class="logo" href="index.html#home" aria-label="MADMAX home"><img class="logo-mark-img" src="assets/mad-maxx-mark.jpg" alt="MADMAX logo"><span>MADMAX</span><small>®</small></a>
+  <span>© 2026 MADMAX — BUILT WITH CURIOSITY.</span>
   <a href="index.html#home" class="back-top">BACK TO HOME ↑</a>
 </footer>
 
@@ -1239,5 +1254,34 @@ setTimeout(
 
 
 <script src="script.js?v=unified-ui-1"></script>
+<script id="water-pointer-relay">
+(() => {
+  const frame = document.querySelector('iframe.water-background');
+  if (!frame) return;
+  let lastX = null, lastY = null, lastT = 0, down = false;
+  const send = (e, isDown = down) => {
+    const w = window.innerWidth || 1, h = window.innerHeight || 1;
+    const now = performance.now();
+    const x = e.clientX / w, y = e.clientY / h;
+    const dt = Math.max(8, now - (lastT || now));
+    const vx = lastX == null ? 0 : (x - lastX) / dt * 16.7;
+    const vy = lastY == null ? 0 : (y - lastY) / dt * 16.7;
+    frame.contentWindow?.postMessage({
+      type: 'water-pointer', x, y, vx, vy,
+      moving: lastX != null && Math.hypot(x - lastX, y - lastY) > 0.0008,
+      active: true, down: isDown
+    }, '*');
+    lastX = x; lastY = y; lastT = now;
+  };
+  window.addEventListener('pointermove', e => send(e), { passive: true });
+  window.addEventListener('pointerdown', e => { down = true; send(e, true); }, { passive: true });
+  window.addEventListener('pointerup', e => { down = false; send(e, false); }, { passive: true });
+  window.addEventListener('pointerleave', () => {
+    frame.contentWindow?.postMessage({ type: 'water-pointer', x: lastX ?? .5, y: lastY ?? .5, active: false, moving: false }, '*');
+    lastX = lastY = null; lastT = 0;
+  });
+})();
+</script>
+
 </body>
 </html>

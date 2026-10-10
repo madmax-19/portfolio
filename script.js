@@ -4,14 +4,36 @@
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Loader
+  // Cinematic MAD MAX logo reveal — plays on each fresh page load.
   document.body.classList.add("loading");
+  const loader = $(".page-loader");
+  const loaderPercent = $(".loader-percent");
+  const loaderBar = $(".loader-line i");
+  const loaderStarted = performance.now();
+  const loaderDuration = reducedMotion ? 250 : 1750;
+  let loaderFrame = 0;
+
+  const paintLoaderProgress = now => {
+    if (!loader || loader.classList.contains("done")) return;
+    const progress = Math.min(100, Math.round(((now - loaderStarted) / loaderDuration) * 100));
+    if (loaderPercent) loaderPercent.textContent = `${String(progress).padStart(2, "0")}%`;
+    // Drive the bar width from the same value as the percentage label.
+    if (loaderBar) loaderBar.style.width = `${progress}%`;
+    if (progress < 100) loaderFrame = requestAnimationFrame(paintLoaderProgress);
+  };
+
+  // Keep the number and fill synchronized, including reduced-motion mode.
+  loaderFrame = requestAnimationFrame(paintLoaderProgress);
   window.addEventListener("load", () => {
+    const elapsed = performance.now() - loaderStarted;
     window.setTimeout(() => {
-      $(".page-loader")?.classList.add("done");
+      if (loaderPercent) loaderPercent.textContent = "100%";
+      if (loaderBar) loaderBar.style.width = "100%";
+      loader?.classList.add("done");
       document.body.classList.remove("loading");
-    }, 450);
-  });
+      cancelAnimationFrame(loaderFrame);
+    }, Math.max(0, loaderDuration - elapsed));
+  }, { once: true });
 
   // Header and scroll progress
   const header = $(".site-header");
